@@ -1,0 +1,84 @@
+# .gitattributes for Workvivo CLI
+# Ensures consistent line endings across platforms (Windows, macOS, Linux)
+
+# Auto detect text files and normalize line endings to LF in the repository
+* text=auto
+
+#
+# Source code files - LF line endings
+#
+*.cs text eol=lf
+*.csx text eol=lf
+*.vb text eol=lf
+*.vbx text eol=lf
+
+#
+# Script files - LF line endings (cross-platform)
+#
+*.sh text eol=lf
+*.bash text eol=lf
+*.ps1 text eol=lf
+*.psm1 text eol=lf
+
+# Windows batch files need CRLF
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+#
+# Configuration and data files - LF line endings
+#
+*.json text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.config text eol=lf
+*.props text eol=lf
+*.targets text eol=lf
+
+#
+# Project files - LF line endings
+#
+*.csproj text eol=lf
+*.vbproj text eol=lf
+*.slnx text eol=lf
+*.sln text eol=crlf
+*.suo binary
+
+#
+# Documentation - LF line endings
+#
+*.md text eol=lf
+*.txt text eol=lf
+LICENSE text eol=lf
+
+#
+# Binary files - treat as binary (no line ending conversion)
+#
+*.dll binary
+*.exe binary
+*.pdb binary
+*.nupkg binary
+*.snupkg binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.zip binary
+*.tar.gz binary
+*.7z binary
+
+#
+# Git configuration
+#
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.editorconfig text eol=lf
+
+#
+# Diff settings for generated files
+#
+*.designer.cs linguist-generated=true
+*.Designer.cs linguist-generated=true
+*.g.cs linguist-generated=true
+*.g.i.cs linguist-generated=true

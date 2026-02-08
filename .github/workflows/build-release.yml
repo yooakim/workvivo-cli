@@ -1,0 +1,109 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            rid: win-x64
+            platform: windows-x64
+            artifact: wv.exe
+          - os: macos-latest
+            rid: osx-x64
+            platform: macos-x64
+            artifact: wv
+          - os: macos-latest
+            rid: osx-arm64
+            platform: macos-arm64
+            artifact: wv
+          - os: ubuntu-latest
+            rid: linux-x64
+            platform: linux-x64
+            artifact: wv
+          - os: ubuntu-latest
+            rid: linux-arm64
+            platform: linux-arm64
+            artifact: wv
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore src/WorkvivoCli.csproj
+
+      - name: Build and publish
+        run: dotnet publish src/WorkvivoCli.csproj -c Release -r ${{ matrix.rid }} --self-contained -o publish/${{ matrix.platform }}
+
+      - name: Create archive (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          cd publish/${{ matrix.platform }}
+          chmod +x ${{ matrix.artifact }}
+          tar -czf ../../wv-${{ matrix.platform }}.tar.gz ${{ matrix.artifact }} appsettings.json
+          cd ../..
+          sha256sum wv-${{ matrix.platform }}.tar.gz > wv-${{ matrix.platform }}.tar.gz.sha256
+
+      - name: Create archive (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          cd publish/${{ matrix.platform }}
+          Compress-Archive -Path ${{ matrix.artifact }}, appsettings.json -DestinationPath ../../wv-${{ matrix.platform }}.zip
+          cd ../..
+          $hash = (Get-FileHash wv-${{ matrix.platform }}.zip -Algorithm SHA256).Hash
+          "$hash  wv-${{ matrix.platform }}.zip" | Out-File wv-${{ matrix.platform }}.zip.sha256 -Encoding ASCII
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: wv-${{ matrix.platform }}
+          path: |
+            wv-${{ matrix.platform }}.*
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Prepare release assets
+        run: |
+          mkdir -p release-assets
+          find artifacts -type f \( -name "*.tar.gz" -o -name "*.zip" -o -name "*.sha256" \) -exec cp {} release-assets/ \;
+          ls -la release-assets/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release-assets/*
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

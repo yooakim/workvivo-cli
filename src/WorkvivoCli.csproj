@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <!-- Application Metadata -->
+    <AssemblyName>wv</AssemblyName>
+    <Version>0.1.0</Version>
+    <Authors>Joakim Westin</Authors>
+    <Company>Joakim Westin AB</Company>
+    <Description>CLI tool for managing Workvivo spaces and users via the Workvivo API</Description>
+    <PackageProjectUrl>https://github.com/yourusername/workvivo-cli</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/yourusername/workvivo-cli</RepositoryUrl>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <UserSecretsId>6dd89ef9-5ef4-41d9-8eb1-70ca7686b62c</UserSecretsId>
+
+    <!-- Self-Contained Publishing Configuration -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifiers>win-x64;osx-x64;osx-arm64;linux-x64;linux-arm64</RuntimeIdentifiers>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
+    <!-- Globalization: Use invariant mode so ICU libraries aren't required on the target system -->
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <!-- Trimming Options (optimize size while preserving functionality) -->
+    <TrimMode>partial</TrimMode>
+    <PublishReadyToRun>false</PublishReadyToRun>
+
+    <!-- Suppress trimming warnings from third-party libraries -->
+    <!-- IL2104: Assembly produced trim warnings (third-party libraries we can't control) -->
+    <NoWarn>$(NoWarn);IL2104</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- CLI Framework (Spectre.Console.Cli replaces System.CommandLine) -->
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.49.1" />
+
+    <!-- Configuration -->
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="10.0.2" />
+
+    <!-- Dependency Injection & HTTP -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

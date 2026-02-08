@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/WorkvivoCli.csproj" />
+  <Project Path="tests/WorkvivoCli.Tests/WorkvivoCli.Tests.csproj" />
+</Solution>

@@ -1,0 +1,30 @@
+PackageIdentifier: JWAB.WorkvivoCli
+PackageVersion: 0.1.0
+PackageName: Workvivo CLI
+Publisher: Joakim Westin AB
+PublisherUrl: https://github.com/yourusername
+PublisherSupportUrl: https://github.com/yourusername/workvivo-cli/issues
+PackageUrl: https://github.com/yourusername/workvivo-cli
+PackageLicenseExpression: GPL-3.0-or-later
+LicenseUrl: https://github.com/yourusername/workvivo-cli/blob/main/LICENSE
+ShortDescription: CLI tool for managing Workvivo spaces and users
+Description: |-
+  Workvivo CLI is a command-line tool for managing Workvivo spaces and users via the Workvivo REST API.
+  It provides an easy-to-use interface for IT admins and DevOps teams to automate Workvivo management tasks.
+
+  Features:
+  - List and manage users
+  - List and manage spaces
+  - Export data in JSON or table format
+  - Cross-platform support (Windows, macOS, Linux)
+  - No .NET runtime required (self-contained executable)
+Moniker: wv
+Tags:
+  - workvivo
+  - cli
+  - api
+  - admin
+  - devops
+  - management
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0
