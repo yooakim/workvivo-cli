@@ -20,6 +20,8 @@ using Spectre.Console.Cli;
 using WorkvivoCli.Output;
 using WorkvivoCli.Services;
 
+using static WorkvivoCli.Output.OutputFormatterFactory;
+
 namespace WorkvivoCli.Commands;
 
 public class ListSpacesCommand : AsyncCommand<ListSpacesCommand.Settings>
@@ -57,11 +59,12 @@ public class ListSpacesCommand : AsyncCommand<ListSpacesCommand.Settings>
     {
         try
         {
-            IOutputFormatter formatter = settings.Json ? new JsonOutputFormatter() : new TableOutputFormatter();
+            var formatter = Create(settings);
+            var machineReadable = IsMachineReadable(settings);
 
             if (settings.All)
             {
-                if (!settings.Json)
+                if (!machineReadable)
                 {
                     Console.Error.WriteLine("Fetching all spaces...");
                 }
@@ -69,7 +72,7 @@ public class ListSpacesCommand : AsyncCommand<ListSpacesCommand.Settings>
                 var allSpaces = await _apiClient.GetAllSpacesAsync(settings.Type);
                 formatter.FormatSpaces(allSpaces);
 
-                if (!settings.Json)
+                if (!machineReadable)
                 {
                     Console.Error.WriteLine($"\nTotal: {allSpaces.Count} spaces");
                 }
@@ -79,7 +82,7 @@ public class ListSpacesCommand : AsyncCommand<ListSpacesCommand.Settings>
                 var result = await _apiClient.GetSpacesAsync(settings.Skip, settings.Take, settings.Type);
                 formatter.FormatSpaces(result.Data);
 
-                if (!settings.Json && result.Total > 0)
+                if (!machineReadable && result.Total > 0)
                 {
                     Console.Error.WriteLine($"\nShowing {result.Data.Count} of {result.Total} spaces (skip: {settings.Skip}, take: {settings.Take})");
                 }
@@ -122,7 +125,7 @@ public class GetSpaceCommand : AsyncCommand<GetSpaceCommand.Settings>
         {
             var space = await _apiClient.GetSpaceAsync(settings.SpaceId);
 
-            IOutputFormatter formatter = settings.Json ? new JsonOutputFormatter() : new TableOutputFormatter();
+            var formatter = Create(settings);
             formatter.FormatSpace(space);
 
             return 0;
@@ -175,11 +178,12 @@ public class SpaceUsersCommand : AsyncCommand<SpaceUsersCommand.Settings>
     {
         try
         {
-            IOutputFormatter formatter = settings.Json ? new JsonOutputFormatter() : new TableOutputFormatter();
+            var formatter = Create(settings);
+            var machineReadable = IsMachineReadable(settings);
 
             if (settings.All)
             {
-                if (!settings.Json)
+                if (!machineReadable)
                 {
                     Console.Error.WriteLine($"Fetching all users in space {settings.SpaceId}...");
                 }
@@ -187,7 +191,7 @@ public class SpaceUsersCommand : AsyncCommand<SpaceUsersCommand.Settings>
                 var allUsers = await _apiClient.GetAllSpaceUsersAsync(settings.SpaceId);
                 formatter.FormatSpaceUsers(allUsers);
 
-                if (!settings.Json)
+                if (!machineReadable)
                 {
                     Console.Error.WriteLine($"\nTotal: {allUsers.Count} users in space {settings.SpaceId}");
                 }
@@ -197,7 +201,7 @@ public class SpaceUsersCommand : AsyncCommand<SpaceUsersCommand.Settings>
                 var result = await _apiClient.GetSpaceUsersAsync(settings.SpaceId, settings.Skip, settings.Take);
                 formatter.FormatSpaceUsers(result.Data);
 
-                if (!settings.Json && result.Total > 0)
+                if (!machineReadable && result.Total > 0)
                 {
                     Console.Error.WriteLine($"\nShowing {result.Data.Count} of {result.Total} users in space {settings.SpaceId} (skip: {settings.Skip}, take: {settings.Take})");
                 }

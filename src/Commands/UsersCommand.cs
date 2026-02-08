@@ -20,6 +20,8 @@ using Spectre.Console.Cli;
 using WorkvivoCli.Output;
 using WorkvivoCli.Services;
 
+using static WorkvivoCli.Output.OutputFormatterFactory;
+
 namespace WorkvivoCli.Commands;
 
 public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
@@ -61,11 +63,12 @@ public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
     {
         try
         {
-            IOutputFormatter formatter = settings.Json ? new JsonOutputFormatter() : new TableOutputFormatter();
+            var formatter = Create(settings);
+            var machineReadable = IsMachineReadable(settings);
 
             if (settings.All)
             {
-                if (!settings.Json)
+                if (!machineReadable)
                 {
                     Console.Error.WriteLine("Fetching all users...");
                 }
@@ -73,7 +76,7 @@ public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
                 var allUsers = await _apiClient.GetAllUsersAsync(settings.InSpaces, settings.Expand);
                 formatter.FormatUsers(allUsers);
 
-                if (!settings.Json)
+                if (!machineReadable)
                 {
                     Console.Error.WriteLine($"\nTotal: {allUsers.Count} users");
                 }
@@ -83,7 +86,7 @@ public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
                 var result = await _apiClient.GetUsersAsync(settings.Skip, settings.Take, settings.InSpaces, settings.Expand);
                 formatter.FormatUsers(result.Data);
 
-                if (!settings.Json && result.Total > 0)
+                if (!machineReadable && result.Total > 0)
                 {
                     Console.Error.WriteLine($"\nShowing {result.Data.Count} of {result.Total} users (skip: {settings.Skip}, take: {settings.Take})");
                 }
@@ -130,7 +133,7 @@ public class GetUserCommand : AsyncCommand<GetUserCommand.Settings>
         {
             var user = await _apiClient.GetUserAsync(settings.UserId, settings.Expand);
 
-            IOutputFormatter formatter = settings.Json ? new JsonOutputFormatter() : new TableOutputFormatter();
+            var formatter = Create(settings);
             formatter.FormatUser(user);
 
             return 0;

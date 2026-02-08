@@ -13,4 +13,9 @@ public class GlobalSettings : CommandSettings
     [Description("Output in JSON format")]
     [DefaultValue(false)]
     public bool Json { get; init; }
+
+    [CommandOption("--csv")]
+    [Description("Output in CSV format")]
+    [DefaultValue(false)]
+    public bool Csv { get; init; }
 }
