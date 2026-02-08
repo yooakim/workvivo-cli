@@ -2,25 +2,13 @@
 
 NB: This is an early version of the Workvivo CLI. At this time it is read-only, not all features are implemented.
 
-A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API.
-
-## Cross-Platform Support
-
-✅ **Cross-platform** - Works on:
-- 🪟 **Windows** (10/11, Server 2019+)
-- 🍎 **macOS** (10.15+)
-- 🐧 **Linux** (Ubuntu, Debian, Fedora, RHEL, etc.)
+A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API. The tool workrs on Windows, macOS and Linux.
 
 ## Quick Start
 
 **No prerequisites** — self-contained executables include the .NET runtime.
 
-```powershell
-# Windows (via winget)
-winget install wv
-```
-
-For macOS, Linux, and other installation options, see the [Installation Guide](docs/INSTALL.md).
+For installation options, see the [Installation Guide](docs/INSTALL.md).
 
 ### Configuration
 
