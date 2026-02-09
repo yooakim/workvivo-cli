@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "workvivo": {
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "workvivo-mcp-server/WorkvivoMcpServer.csproj"
+      ],
+      "env": {
+        "WORKVIVO_APITOKEN": "your-api-token-here",
+        "WORKVIVO_ORGANIZATIONID": "your-org-id-here",
+        "WORKVIVO_BASEURL": "https://api.workvivo.com/v1"
+      }
+    }
+  }
+}

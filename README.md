@@ -4,6 +4,23 @@ NB: This is an early version of the Workvivo CLI. At this time it is read-only, 
 
 A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API. The tool workrs on Windows, macOS and Linux.
 
+## 🤖 MCP Server for AI Assistants
+
+This repository now includes a **Model Context Protocol (MCP) server** that enables AI assistants like Claude, GitHub Copilot, and VS Code to interact with your Workvivo data.
+
+**What can AI assistants do with the MCP server?**
+- Answer questions about your organization ("How many users are in the Marketing space?")
+- Search for users by name or email
+- List spaces and their members
+- Help troubleshoot membership issues
+- Generate reports about your organization structure
+
+**11 tools available:** ListUsers, GetUser, SearchUsersByName, SearchUsersByEmail, GetAllUsers, ListSpaces, GetSpace, ListSpaceUsers, GetAllSpaceUsers, GetAllSpaces, SearchSpacesByName
+
+👉 **[Get Started with the MCP Server](workvivo-mcp-server/README.md)**
+
+---
+
 ## Quick Start
 
 **No prerequisites** — self-contained executables include the .NET runtime.
