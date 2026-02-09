@@ -44,10 +44,10 @@ jobs:
           dotnet-version: "10.0.x"
 
       - name: Restore dependencies
-        run: dotnet restore src/WorkvivoCli.csproj
+        run: dotnet restore src/workvivo-cli/WorkvivoCli.csproj
 
       - name: Build and publish
-        run: dotnet publish src/WorkvivoCli.csproj -c Release -r ${{ matrix.rid }} --self-contained -o publish/${{ matrix.platform }}
+        run: dotnet publish src/workvivo-cli/WorkvivoCli.csproj -c Release -r ${{ matrix.rid }} --self-contained -o publish/${{ matrix.platform }}
 
       - name: Create archive (Unix)
         if: runner.os != 'Windows'

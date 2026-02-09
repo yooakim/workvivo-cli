@@ -18,7 +18,7 @@ function Build-Platform {
 
     Write-Host ""
     Write-Host "Building for $PlatformName ($Rid)..." -ForegroundColor Cyan
-    dotnet publish src/WorkvivoCli.csproj `
+    dotnet publish src/workvivo-cli/WorkvivoCli.csproj `
         -c Release `
         -r $Rid `
         --self-contained `

@@ -52,9 +52,9 @@ export WORKVIVO_BASEURL="https://api.workvivo.com/v1"
 ### 2. User Secrets (Recommended for Local Development)
 
 ```bash
-dotnet user-secrets set "ApiToken" "your-api-token" --project workvivo-mcp-server/WorkvivoMcpServer.csproj
-dotnet user-secrets set "OrganizationId" "your-org-id" --project workvivo-mcp-server/WorkvivoMcpServer.csproj
-dotnet user-secrets set "BaseUrl" "https://api.workvivo.com/v1" --project workvivo-mcp-server/WorkvivoMcpServer.csproj
+dotnet user-secrets set "ApiToken" "your-api-token" --project src/workvivo-mcp-server/WorkvivoMcpServer.csproj
+dotnet user-secrets set "OrganizationId" "your-org-id" --project src/workvivo-mcp-server/WorkvivoMcpServer.csproj
+dotnet user-secrets set "BaseUrl" "https://api.workvivo.com/v1" --project src/workvivo-mcp-server/WorkvivoMcpServer.csproj
 ```
 
 ### 3. appsettings.json (Not Recommended for Credentials)
@@ -94,7 +94,7 @@ Add this to your Claude Desktop configuration file:
       "args": [
         "run",
         "--project",
-        "C:/path/to/workvivo-cli/workvivo-mcp-server/WorkvivoMcpServer.csproj"
+        "C:/path/to/workvivo-cli/src/workvivo-mcp-server/WorkvivoMcpServer.csproj"
       ],
       "env": {
         "WORKVIVO_APITOKEN": "your-api-token",
@@ -118,7 +118,7 @@ Add this to `.cursor/mcp.json` in your workspace:
       "args": [
         "run",
         "--project",
-        "workvivo-mcp-server/WorkvivoMcpServer.csproj"
+        "src/workvivo-mcp-server/WorkvivoMcpServer.csproj"
       ],
       "env": {
         "WORKVIVO_APITOKEN": "your-api-token",
@@ -136,7 +136,7 @@ The MCP Inspector is a tool for testing MCP servers:
 
 ```bash
 # Install and run the MCP Inspector
-npx @modelcontextprotocol/inspector dotnet run --project workvivo-mcp-server/WorkvivoMcpServer.csproj
+npx @modelcontextprotocol/inspector dotnet run --project src/workvivo-mcp-server/WorkvivoMcpServer.csproj
 ```
 
 This will open a web interface where you can:
@@ -186,7 +186,7 @@ Make sure you've configured credentials using one of the three methods above. Th
 1. Check that `.vscode/mcp.json` exists and has correct configuration
 2. Restart VS Code completely
 3. Check VS Code output panel for MCP-related errors
-4. Verify the server starts correctly: `dotnet run --project workvivo-mcp-server/WorkvivoMcpServer.csproj`
+4. Verify the server starts correctly: `dotnet run --project src/workvivo-mcp-server/WorkvivoMcpServer.csproj`
 
 ### API authentication errors
 

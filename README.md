@@ -17,7 +17,7 @@ This repository now includes a **Model Context Protocol (MCP) server** that enab
 
 **11 tools available:** ListUsers, GetUser, SearchUsersByName, SearchUsersByEmail, GetAllUsers, ListSpaces, GetSpace, ListSpaceUsers, GetAllSpaceUsers, GetAllSpaces, SearchSpacesByName
 
-👉 **[Get Started with the MCP Server](workvivo-mcp-server/README.md)**
+👉 **[Get Started with the MCP Server](src/workvivo-mcp-server/README.md)**
 
 ---
 
