@@ -1,6 +1,6 @@
-using WorkvivoCli.Models;
+using Workvivo.Shared.Models;
 
-namespace WorkvivoCli.Services;
+namespace Workvivo.Shared.Services;
 
 /// <summary>
 /// Interface for the Workvivo API client.

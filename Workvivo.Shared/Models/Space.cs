@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace WorkvivoCli.Models;
+namespace Workvivo.Shared.Models;
 
 public class Space
 {

@@ -1,3 +1,5 @@
+using Workvivo.Shared.Models;
+
 namespace WorkvivoCli.Output;
 
 /// <summary>
@@ -9,7 +11,7 @@ namespace WorkvivoCli.Output;
 /// </summary>
 public class CsvOutputFormatter : IOutputFormatter
 {
-    public void FormatUsers(IEnumerable<Models.User> users)
+    public void FormatUsers(IEnumerable<User> users)
     {
         WriteUserListHeader();
         foreach (var user in users)
@@ -18,13 +20,13 @@ public class CsvOutputFormatter : IOutputFormatter
         }
     }
 
-    public void FormatUser(Models.User user)
+    public void FormatUser(User user)
     {
         WriteUserDetailHeader();
         WriteUserDetailRow(user);
     }
 
-    public void FormatSpaces(IEnumerable<Models.Space> spaces)
+    public void FormatSpaces(IEnumerable<Space> spaces)
     {
         WriteSpaceListHeader();
         foreach (var space in spaces)
@@ -33,13 +35,13 @@ public class CsvOutputFormatter : IOutputFormatter
         }
     }
 
-    public void FormatSpace(Models.Space space)
+    public void FormatSpace(Space space)
     {
         WriteSpaceDetailHeader();
         WriteSpaceDetailRow(space);
     }
 
-    public void FormatSpaceUsers(IEnumerable<Models.User> users)
+    public void FormatSpaceUsers(IEnumerable<User> users)
     {
         WriteSpaceUserListHeader();
         foreach (var user in users)
@@ -55,7 +57,7 @@ public class CsvOutputFormatter : IOutputFormatter
         Console.WriteLine("id,external_id,email,name,display_name,first_name,last_name,job_title,has_access");
     }
 
-    private static void WriteUserListRow(Models.User user)
+    private static void WriteUserListRow(User user)
     {
         Console.WriteLine(string.Join(",",
             Escape(user.Id.ToString()),
@@ -77,7 +79,7 @@ public class CsvOutputFormatter : IOutputFormatter
                           "timezone,locale,hire_date,manager_id,has_logged_in,is_frontline,has_access,permalink");
     }
 
-    private static void WriteUserDetailRow(Models.User user)
+    private static void WriteUserDetailRow(User user)
     {
         Console.WriteLine(string.Join(",",
             Escape(user.Id.ToString()),
@@ -105,7 +107,7 @@ public class CsvOutputFormatter : IOutputFormatter
         Console.WriteLine("id,name,visibility,is_corporate,is_external,categories");
     }
 
-    private static void WriteSpaceListRow(Models.Space space)
+    private static void WriteSpaceListRow(Space space)
     {
         var categories = space.Categories.Any()
             ? string.Join("; ", space.Categories.Select(c => c.Name))
@@ -128,7 +130,7 @@ public class CsvOutputFormatter : IOutputFormatter
                           "is_read_only,parent_space_id,categories,created_at,updated_at,permalink");
     }
 
-    private static void WriteSpaceDetailRow(Models.Space space)
+    private static void WriteSpaceDetailRow(Space space)
     {
         var categories = space.Categories.Any()
             ? string.Join("; ", space.Categories.Select(c => c.Name))
@@ -157,7 +159,7 @@ public class CsvOutputFormatter : IOutputFormatter
         Console.WriteLine("id,external_id,email,name,display_name,first_name,last_name,job_title,has_access,space_role");
     }
 
-    private static void WriteSpaceUserListRow(Models.User user)
+    private static void WriteSpaceUserListRow(User user)
     {
         Console.WriteLine(string.Join(",",
             Escape(user.Id.ToString()),

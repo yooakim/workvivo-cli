@@ -1,10 +1,11 @@
 using Spectre.Console;
+using Workvivo.Shared.Models;
 
 namespace WorkvivoCli.Output;
 
 public class TableOutputFormatter : IOutputFormatter
 {
-    public void FormatUsers(IEnumerable<Models.User> users)
+    public void FormatUsers(IEnumerable<User> users)
     {
         var table = new Table();
         table.Border = TableBorder.Rounded;
@@ -27,7 +28,7 @@ public class TableOutputFormatter : IOutputFormatter
         AnsiConsole.Write(table);
     }
 
-    public void FormatUser(Models.User user)
+    public void FormatUser(User user)
     {
         var table = new Table();
         table.Border = TableBorder.Rounded;
@@ -64,7 +65,7 @@ public class TableOutputFormatter : IOutputFormatter
         AnsiConsole.Write(table);
     }
 
-    public void FormatSpaces(IEnumerable<Models.Space> spaces)
+    public void FormatSpaces(IEnumerable<Space> spaces)
     {
         var table = new Table();
         table.Border = TableBorder.Rounded;
@@ -92,7 +93,7 @@ public class TableOutputFormatter : IOutputFormatter
         AnsiConsole.Write(table);
     }
 
-    public void FormatSpace(Models.Space space)
+    public void FormatSpace(Space space)
     {
         var table = new Table();
         table.Border = TableBorder.Rounded;
@@ -134,7 +135,7 @@ public class TableOutputFormatter : IOutputFormatter
         AnsiConsole.Write(table);
     }
 
-    public void FormatSpaceUsers(IEnumerable<Models.User> users)
+    public void FormatSpaceUsers(IEnumerable<User> users)
     {
         var table = new Table();
         table.Border = TableBorder.Rounded;

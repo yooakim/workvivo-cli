@@ -60,4 +60,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Workvivo.Shared\Workvivo.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

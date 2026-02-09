@@ -1,9 +1,9 @@
 using System.Net.Http.Json;
-using WorkvivoCli.Configuration;
-using WorkvivoCli.Models;
-using WorkvivoCli.Serialization;
+using Workvivo.Shared.Configuration;
+using Workvivo.Shared.Models;
+using Workvivo.Shared.Serialization;
 
-namespace WorkvivoCli.Services;
+namespace Workvivo.Shared.Services;
 
 public class WorkvivoApiClient : IWorkvivoApiClient
 {

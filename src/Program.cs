@@ -20,9 +20,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using WorkvivoCli.Commands;
-using WorkvivoCli.Configuration;
+using Workvivo.Shared.Configuration;
 using WorkvivoCli.Infrastructure;
-using WorkvivoCli.Services;
+using Workvivo.Shared.Services;
 
 // Build configuration from appsettings.json, user-secrets, and environment variables
 var configuration = new ConfigurationBuilder()
