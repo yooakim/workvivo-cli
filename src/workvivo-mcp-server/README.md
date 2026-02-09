@@ -129,6 +129,43 @@ Add this to `.cursor/mcp.json` in your workspace:
   }
 }
 ```
+### Warp.dev
+Add this new MCP server to Warp:
+
+```json
+{
+  "workvivo": {
+    "args": [
+      "mcp"
+    ],
+    "command": "WorkvivoMcpServer.exe",
+    "env": {
+      "WORKVIVO_APITOKEN": "your-api-token",
+      "WORKVIVO_BASEURL": "https://api.eu2.workvivo.com/v1",
+      "WORKVIVO_ORGANIZATIONID": "your-org-id"
+    }
+  }
+}
+```
+
+### Zed.dev 
+Add this new MCP server to Zed:
+
+```json
+{
+  "workvivo": {
+    "args": [
+      "mcp"
+    ],
+    "command": "WorkvivoMcpServer.exe",
+    "env": {
+      "WORKVIVO_APITOKEN": "your-api-token",
+      "WORKVIVO_BASEURL": "https://api.eu2.workvivo.com/v1",
+      "WORKVIVO_ORGANIZATIONID": "your-org-id"
+    }
+  }
+}
+```
 
 ## Testing with MCP Inspector
 
