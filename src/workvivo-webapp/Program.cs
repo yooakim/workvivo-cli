@@ -31,12 +31,8 @@ catch (InvalidOperationException ex)
 builder.Services.AddSingleton(settings);
 
 // Register HttpClient for IWorkvivoApiClient
-builder.Services.AddHttpClient<IWorkvivoApiClient, WorkvivoApiClient>(client =>
-{
-    client.BaseAddress = new Uri(settings.BaseUrl);
-    client.DefaultRequestHeaders.Add("Authorization", $"Bearer {settings.ApiToken}");
-    client.DefaultRequestHeaders.Add("Workvivo-OrgId", settings.OrganizationId);
-});
+// Note: WorkvivoApiClient constructor will set headers, so we only configure the factory here
+builder.Services.AddHttpClient<IWorkvivoApiClient, WorkvivoApiClient>();
 
 // Add memory cache
 builder.Services.AddMemoryCache();
