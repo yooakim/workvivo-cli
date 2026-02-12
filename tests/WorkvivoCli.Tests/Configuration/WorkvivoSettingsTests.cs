@@ -1,5 +1,5 @@
 using FluentAssertions;
-using WorkvivoCli.Configuration;
+using Workvivo.Shared.Configuration;
 using Xunit;
 
 namespace WorkvivoCli.Tests.Configuration;

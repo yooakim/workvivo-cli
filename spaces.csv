@@ -1,0 +1,466 @@
+id,name,visibility,is_corporate,is_external,categories
+82364,Kommunikation och insamling,public,true,false,
+82367,Uppdragserfarenheter och AAR,public,true,false,
+124438,Ekonomi,public,true,false,
+124492,Utbildning,public,true,false,
+124496,Utrustning,public,true,false,
+124497,Teknik - Drift och underhåll,public,true,false,
+124498,Forskning och utveckling,public,true,false,
+124499,Operativa systemstöd,public,true,false,
+124509,Redaktörer,public,true,false,
+141588,RS Sundsvall,hidden,false,false,Huvudgrupp Stationer
+141592,Karlsvik,hidden,false,false,Undergrupp till Station
+141593,Stenstan,hidden,false,false,Undergrupp till Station
+141607,Bilder och filmer Sundsvall,hidden,false,false,
+141608,Elevutbildning,hidden,false,false,
+141626,Internationellt,public,true,false,
+141627,Instruktörer,hidden,false,false,
+141933,Bilder och filmer,public,false,false,
+141940,IT-relaterade frågor,public,true,false,
+141967,Samverkan Stockholmsområdet,public,false,false,Samverkansgrupper
+142777,RS Strömstad,hidden,false,false,Huvudgrupp Stationer
+142778,RS Fjällbacka,hidden,false,false,Huvudgrupp Stationer
+142779,RS Smögen,hidden,false,false,Huvudgrupp Stationer
+142780,RS Uddevalla,hidden,false,false,Huvudgrupp Stationer
+142781,RS Käringön,hidden,false,false,Huvudgrupp Stationer
+142782,RS Stenungsund,hidden,false,false,Huvudgrupp Stationer
+142783,RS Skärhamn,hidden,false,false,Huvudgrupp Stationer
+142784,RS Rörö,hidden,false,false,Huvudgrupp Stationer
+142785,RS Luleå,hidden,false,false,Huvudgrupp Stationer
+142786,RS Hovås,hidden,false,false,Huvudgrupp Stationer
+142787,RS Piteå,hidden,false,false,Huvudgrupp Stationer
+142788,RS Skellefteå,hidden,false,false,Huvudgrupp Stationer
+142789,RS Holmsund,hidden,false,false,Huvudgrupp Stationer
+142790,RS Örnsköldsvik,hidden,false,false,Huvudgrupp Stationer
+142791,RS Härnösand,hidden,false,false,Huvudgrupp Stationer
+142793,RS Bua,hidden,false,false,Huvudgrupp Stationer
+142794,RS Storsjön,hidden,false,false,Huvudgrupp Stationer
+142795,RS Falkenberg,hidden,false,false,Huvudgrupp Stationer
+142796,RS Grötvik,hidden,false,false,Huvudgrupp Stationer
+142797,RS Lönnånger,hidden,false,false,Huvudgrupp Stationer
+142798,RS Söderhamn,hidden,false,false,Huvudgrupp Stationer
+142799,RS Torekov,hidden,false,false,Huvudgrupp Stationer
+142800,RS Gävle,hidden,false,false,Huvudgrupp Stationer
+142801,RS Öregrund,hidden,false,false,Huvudgrupp Stationer
+142802,RS Höganäs,hidden,false,false,Huvudgrupp Stationer
+142803,RS Räfsnäs,hidden,false,false,Huvudgrupp Stationer
+142805,RS Råå,hidden,false,false,Huvudgrupp Stationer
+142806,RS Barsebäck,hidden,false,false,Huvudgrupp Stationer
+142807,RS Lomma,hidden,false,false,Huvudgrupp Stationer
+142808,RS Falsterbokanalen,hidden,false,false,Huvudgrupp Stationer
+142809,RS Trelleborg,hidden,false,false,Huvudgrupp Stationer
+142810,RS Ystad,hidden,false,false,Huvudgrupp Stationer
+142811,RS Skillinge,hidden,false,false,Huvudgrupp Stationer
+142812,RS Kivik,hidden,false,false,Huvudgrupp Stationer
+142813,RS Åhus,hidden,false,false,Huvudgrupp Stationer
+142815,RS Hörvik,hidden,false,false,Huvudgrupp Stationer
+142817,RS Grönhögen,hidden,false,false,Huvudgrupp Stationer
+142818,RS Möja,hidden,false,false,Huvudgrupp Stationer
+142819,RS Stockholm,hidden,false,false,Huvudgrupp Stationer
+142820,RS Munsö/Ekerö,hidden,false,false,Huvudgrupp Stationer
+142821,RS Värmdö,hidden,false,false,Huvudgrupp Stationer
+142822,RS Dalarö,hidden,false,false,Huvudgrupp Stationer
+142823,RS Nynäshamn,hidden,false,false,Huvudgrupp Stationer
+142824,RS Trosa,hidden,false,false,Huvudgrupp Stationer
+142825,RS Loftahammar,hidden,false,false,Huvudgrupp Stationer
+142826,RS Arkösund,hidden,false,false,Huvudgrupp Stationer
+142827,RS Fårösund,hidden,false,false,Huvudgrupp Stationer
+142828,RS Visby,hidden,false,false,Huvudgrupp Stationer
+142829,RS Vändburg,hidden,false,false,Huvudgrupp Stationer
+142830,RS Böda,hidden,false,false,Huvudgrupp Stationer
+142832,RS Simpevarp,hidden,false,false,Huvudgrupp Stationer
+142833,RS Mönsterås,hidden,false,false,Huvudgrupp Stationer
+142834,RS Kalmar,hidden,false,false,Huvudgrupp Stationer
+142835,RS Bergkvara,hidden,false,false,Huvudgrupp Stationer
+142836,RS Hasslö,hidden,false,false,Huvudgrupp Stationer
+142837,RS Sölvesborg,hidden,false,false,Huvudgrupp Stationer
+142838,RS Växjö,hidden,false,false,Huvudgrupp Stationer
+142839,RS Bolmen,hidden,false,false,Huvudgrupp Stationer
+142840,RS Visingsö,hidden,false,false,Huvudgrupp Stationer
+142841,RS Vadstena/Motala,hidden,false,false,Huvudgrupp Stationer
+142842,RS Kållandsö,hidden,false,false,Huvudgrupp Stationer
+142843,RS Mariestad,hidden,false,false,Huvudgrupp Stationer
+142844,RS Åmål,hidden,false,false,Huvudgrupp Stationer
+142845,RS Hammarö,hidden,false,false,Huvudgrupp Stationer
+142846,RS Kristinehamn,hidden,false,false,Huvudgrupp Stationer
+142847,RS Hjälmaren,hidden,false,false,Huvudgrupp Stationer
+142848,RS Strängnäs,hidden,false,false,Huvudgrupp Stationer
+142849,RS Västerås,hidden,false,false,Huvudgrupp Stationer
+142850,RS Uppsala,hidden,false,false,Huvudgrupp Stationer
+142851,RS Siljan/Runn,hidden,false,false,Huvudgrupp Stationer
+142884,Samverkan Mälaren,public,false,false,Samverkansgrupper
+142885,Samverkan Gävle - Söderhamn - Hudiksvall - Lönnånger,public,false,false,Samverkansgrupper
+142886,Samverkan Räfsnäs - Öregrund - Gävle,public,false,false,Samverkansgrupper
+142887,Samverkan Vänern,public,false,false,Samverkansgrupper
+142944,Externa olycksrapporter och haveriutredningar,public,false,false,
+143109,RS Hudiksvall,hidden,false,false,Huvudgrupp Stationer
+143110,RS Södertälje,hidden,false,false,Huvudgrupp Stationer
+144417,Workvivos Ambassad,private,false,false,
+144431,Teknik Rescue Enok,hidden,false,false,
+144432,Teknik Rescue Henry Andersson,hidden,false,false,
+144433,Teknik Rescue Lillie af Vivesta,hidden,false,false,
+144434,Stationshuset,hidden,false,false,
+144435,Bilder och filmer,hidden,false,false,
+144436,Roberts Testgrupp,hidden,false,false,
+144439,Skeppare,hidden,false,false,Undergrupp till Station
+144440,Jour,hidden,false,false,Undergrupp till Station
+144443,Utbildningsgruppen,hidden,false,false,
+144444,Marknadsgruppen,hidden,false,false,Undergrupp till Station
+144446,Ledningsgrupp,hidden,false,false,Undergrupp till Station
+144447,Lite mer avspänt!,hidden,false,false,Undergrupp till Station
+144448,RS Sundsvall - Alvik,hidden,false,false,
+144450,Rsc Kreab,hidden,false,false,
+144453,Befälhavare,hidden,false,false,Undergrupp till Station
+144454,Skeppare,hidden,false,false,Undergrupp till Station
+144457,Skeppare,hidden,false,false,Undergrupp till Station
+144458,City - RS Sundsvall,hidden,false,false,
+144460,Båtgruppen,hidden,false,false,Undergrupp till Station
+144461,Enhetsgrupp,hidden,false,false,Undergrupp till Station
+144462,Elever,hidden,false,false,Undergrupp till Station
+144463,Skeppare - RS Söderhamn,hidden,false,false,
+144464,Stationsledning  - RS Söderhamn,hidden,false,false,
+144465,Utbildning & Övning  - RS Söderhamn,hidden,false,false,
+144466,Underhåll  - RS Söderhamn,hidden,false,false,
+144467,Roberts undergrupp,hidden,false,false,
+144468,Snackgrupp,hidden,false,false,Undergrupp till Station
+144470,Rescue Hans Carlsson,hidden,false,false,Undergrupp till Station
+144471,Rescue Odd Fellow,hidden,false,false,Undergrupp till Station
+144482,Nåttarö Jourgrupp,hidden,false,false,Undergrupp till Station
+144483,Torö Jourgrupp,hidden,false,false,Undergrupp till Station
+144484,Lisö Jourgrupp,hidden,false,false,Undergrupp till Station
+144485,Muskö Jourgrupp,hidden,false,false,Undergrupp till Station
+144487,Båtgrupp RS Hörvik,hidden,false,false,
+144488,RS Luleå Utrustning,hidden,false,false,Undergrupp till Station
+144489,Miljöräddningssläp Västerås,hidden,false,false,Undergrupp till Station
+144490,Rescue Torbjörn,hidden,false,false,Undergrupp till Station
+144491,Båtgruppen,hidden,false,false,
+144492,Befälhavare,hidden,false,false,
+144493,Båtarna,hidden,false,false,Undergrupp till Station
+144494,Test RS Värmdö,hidden,false,false,
+144495,Rsc Ångfartygsbefälhavareföreningen,hidden,false,false,
+144496,Stationsledning Grötvik,hidden,false,false,
+144502,Stationsledning RS Hörvik,hidden,false,false,
+144504,🛟Befälhavare,hidden,false,false,Undergrupp till Station
+144505,Skeppare RS Hörvik,hidden,false,false,
+144761,Skeppare RS Södertälje,hidden,false,false,Undergrupp till Station
+144771,Bilder & Filmer - RS Uppsala,hidden,false,false,Undergrupp till Station
+144773,Skeppargruppen,hidden,false,false,Undergrupp till Station
+144775,Elever,hidden,false,false,Undergrupp till Station
+144779,Utbildningsgruppen,hidden,false,false,Undergrupp till Station
+144780,Elever,hidden,false,false,Undergrupp till Station
+144792,Husgruppen,hidden,false,false,
+144800,Skeppare,hidden,false,false,
+145077,Skeppare,hidden,false,false,Undergrupp till Station
+145078,RS Sundsvall - Enheter och bryggor,hidden,false,false,Undergrupp till Station
+145079,Båtar,hidden,false,false,
+145338,Skeppare RS Bergkvara,hidden,false,false,
+145339,Stationshus,hidden,false,false,Undergrupp till Station
+145340,Svävarjour,hidden,false,false,Undergrupp till Station
+145342,Rsc Sten och Laila,hidden,false,false,Undergrupp till Station
+145347,Bilder & Filmer Rs Skellefteå,hidden,false,false,Undergrupp till Station
+145356,Rescue Ulla Brita,hidden,false,false,Undergrupp till Station
+145369,🛟 Händelser,hidden,false,false,Undergrupp till Station
+145374,Rescue Ulla Karin,hidden,false,false,Undergrupp till Station
+145384,Runn,hidden,false,false,Undergrupp till Station
+145385,Siljan,hidden,false,false,Undergrupp till Station
+145386,Barken,hidden,false,false,Undergrupp till Station
+145390,Skeppare,hidden,false,false,Undergrupp till Station
+145392,Stationsansvariga,hidden,false,false,
+145394,Maritima avdelningen,hidden,false,false,
+145401,Båt & Teknik RS Södertälje,hidden,false,false,Undergrupp till Station
+145403,Testa och Lära,hidden,false,false,Undergrupp till Station
+145404,Rsc William Eriksson,hidden,false,false,Undergrupp till Station
+145405,Rsc Volvo penta,hidden,false,false,Undergrupp till Station
+145406,Rsc Drottning Silvia,hidden,false,false,Undergrupp till Station
+145407,Befälhavare RS Trelleborg,hidden,false,false,Undergrupp till Station
+145416,Befälhavare RS Stenungsund,hidden,false,false,Undergrupp till Station
+145417,Utbildningsgruppen RS Stenungsund,hidden,false,false,Undergrupp till Station
+145418,Elevgruppen,hidden,false,false,
+145420,Båtar Rs Skellefteå,hidden,false,false,
+145421,Stationshus Rs Skellefteå,hidden,false,false,
+145709,Befälhavare/Skeppare,hidden,false,false,
+145710,Teknik,hidden,false,false,
+145719,Fastigheter,hidden,false,false,Undergrupp till Station
+145720,Viktig Information,hidden,false,false,Undergrupp till Station
+145721,Jungfrusunds brygga,hidden,false,false,Undergrupp till Station
+145723,Stationsledning RS Hammarö,hidden,false,false,
+145724,Munsö brygga,hidden,false,false,Undergrupp till Station
+145725,Karlskärs brygga,hidden,false,false,Undergrupp till Station
+145726,Piteå Bryggan,hidden,false,false,Undergrupp till Station
+145727,Jour RS Arkösund,hidden,false,false,
+145728,Publicera gruppen RS Arkösund,hidden,false,false,
+145729,FIP RS Arkösund,hidden,false,false,
+145730,Instruktörer,hidden,false,false,Undergrupp till Station
+145731,Operativastödet & bryggkoodinatorer,hidden,false,false,Undergrupp till Station
+145732,"Bilder, uppdrag och övningar RS Öregrund",hidden,false,false,Undergrupp till Station
+145733,Off-topic,hidden,false,false,Undergrupp till Station
+145738,Sjöräddningsdag RS Arkösund,hidden,false,false,
+145866,Ledningsgrupp,hidden,false,false,Undergrupp till Station
+145870,Elev,hidden,false,false,Undergrupp till Station
+145871,Rsc Björn Sjökvist,hidden,false,false,Undergrupp till Station
+145872,Viktig information,hidden,false,false,Undergrupp till Station
+145873,Off Topic,hidden,false,false,Undergrupp till Station
+145874,Uppdragserfarenheter,hidden,false,false,
+145875,Bilder & Filmer,hidden,false,false,
+145878,Skepparegruppen,hidden,false,false,Undergrupp till Station
+145879,Bildgalleri RS Siljan/Runn,hidden,false,false,Undergrupp till Station
+145880,RS Stenungsund Stationsledning,hidden,false,false,Undergrupp till Station
+145881,1:e Skeppare,hidden,false,false,Undergrupp till Station
+145882,Jour grupp 1,hidden,false,false,Undergrupp till Station
+145884,Jour grupp 2,hidden,false,false,Undergrupp till Station
+145886,Jour grupp 3,hidden,false,false,Undergrupp till Station
+145888,Jour grupp 4,hidden,false,false,Undergrupp till Station
+145889,Rescue Västerfjärden,hidden,false,false,Undergrupp till Station
+145891,Jour grupp 5,hidden,false,false,Undergrupp till Station
+145892,Flytande Stationshuset,hidden,false,false,
+145893,Jour grupp 6,hidden,false,false,Undergrupp till Station
+145894,Stationshuset Vinön,hidden,false,false,Undergrupp till Station
+145895,Rescue 930,hidden,false,false,Undergrupp till Station
+145896,Rescue Smulle Svävare,hidden,false,false,Undergrupp till Station
+145897,Rescue Hjälmaren 90E,hidden,false,false,Undergrupp till Station
+145899,Jourlag 2,hidden,false,false,Undergrupp till Station
+145900,Jourlag 3,hidden,false,false,Undergrupp till Station
+145901,Skeppare,hidden,false,false,Undergrupp till Station
+145902,Jourlag 1,hidden,false,false,Undergrupp till Station
+145904,🛟 Svävare,hidden,false,false,
+146244,Skeppare RS Gävle,hidden,false,false,Undergrupp till Station
+146247,Första Hjälpen RS Gävle,hidden,false,false,
+146248,Elever RS Gävle,hidden,false,false,Undergrupp till Station
+146249,Bilder & Filmer RS Visby,hidden,false,false,Undergrupp till Station
+146250,Ledning RS Gävle,hidden,false,false,
+146251,Greta Dybeck,hidden,false,false,Undergrupp till Station
+146252,Magnhild Ekman,hidden,false,false,Undergrupp till Station
+146263,WV-support!,hidden,false,false,
+146268,Samverkan Öresund (Torekov-Ystad),public,false,false,Samverkansgrupper
+146271,Svävargruppen,hidden,false,false,Undergrupp till Station
+146272,Stationshus-gruppen,hidden,false,false,Undergrupp till Station
+146277,Ledningsgruppen,hidden,false,false,Undergrupp till Station
+146279,Utbildningsgruppen,hidden,false,false,Undergrupp till Station
+146280,Kommunikation & Insamlingsgruppen,hidden,false,false,Undergrupp till Station
+146299,Karlskronabryggan,hidden,false,false,Undergrupp till Station
+146300,RS Hasslö - SAR Summit 2026,hidden,false,false,Undergrupp till Station
+146301,Aspirantgrupp RS Visby,hidden,false,false,
+146313,Information om och styrning av nytt Stationshus,hidden,false,false,Undergrupp till Station
+146322,Ledningsgruppen,hidden,false,false,Undergrupp till Station
+146364,Öppet forum för stationen,hidden,false,false,Undergrupp till Station
+146372,Skeppare,hidden,false,false,Undergrupp till Station
+146376,Stationsanställda,hidden,false,false,
+146384,RS Bua Skeppare,hidden,false,false,Undergrupp till Station
+146385,RS Bua Besättning,hidden,false,false,Undergrupp till Station
+146386,RS Bua Bilder o filmer,hidden,false,false,
+146387,RS Bua Socialt,hidden,false,false,Undergrupp till Station
+146407,RS Åhus Bilder och filmer,hidden,false,false,Undergrupp till Station
+146693,Sandlåda - RS Siljan/Runn,hidden,false,false,Undergrupp till Station
+146695,RS Växjö GC,hidden,false,false,
+146696,RS Växjö jourgrupp 1,hidden,false,false,
+146697,RS Växjö jourgrupp 2,hidden,false,false,
+146698,RS Växjö jourgrupp 3,hidden,false,false,
+146699,RS Växjö jourgrupp 4,hidden,false,false,
+146700,"RS Växjö Bilder, Foton och andra trevligheter",hidden,false,false,
+146701,RS Växjö Befälhavare,hidden,false,false,
+146702,RS Växjö Teknik och service,hidden,false,false,
+146704,RS Växjö Övningsgrupp,hidden,false,false,
+146706,RS Växjö Mångfald,hidden,false,false,
+146707,RS Växjö Marknad,hidden,false,false,
+146708,RS Växjö Svävarpiloter,hidden,false,false,
+146709,RS Växjö Studiegrupp maskin & fartygsbefäl,hidden,false,false,
+146710,Rescue Snow,hidden,false,false,Undergrupp till Station
+146711,Rescue Ruben Rausing,hidden,false,false,Undergrupp till Station
+146732,Rapporter - Munsö/Ekerö,hidden,false,false,Undergrupp till Station
+147389,Bild & Film Vadstena/Motala,hidden,false,false,Undergrupp till Station
+147394,Rescue Oscar,hidden,false,false,
+148050,Vintergrupp Vadstena/Motala,hidden,false,false,Undergrupp till Station
+150117,RS Räfsnäs jourskeppare,hidden,false,false,Undergrupp till Station
+150118,Stationshus 474-7910 Vadstena/Motala,hidden,false,false,Undergrupp till Station
+150119,Befäl 474-7918 Vadstena/Motala,hidden,false,false,Undergrupp till Station
+150120,Stig Kjellgren 474-2800,hidden,false,false,Undergrupp till Station
+150121,Ivan Holmberg 474-3050,hidden,false,false,Undergrupp till Station
+150122,Rescuerunner 474-9630,hidden,false,false,Undergrupp till Station
+150123,Svävare 474-5610 & 474-5640,hidden,false,false,Undergrupp till Station
+150124,Dragbil 474-8213,hidden,false,false,Undergrupp till Station
+150125,Miljöräddningssläp 25,hidden,false,false,Undergrupp till Station
+150126,Pant Vadstena/Motala,hidden,false,false,Undergrupp till Station
+150134,Skeppare RS Arkösund,hidden,false,false,
+150136,Sjuksköterskor RS Arkösund,hidden,false,false,
+150153,Jourskeppare Kalmar,hidden,false,false,Undergrupp till Station
+150154,Skeppare Kalmar,hidden,false,false,Undergrupp till Station
+150155,Bunkergruppen Kalmar,hidden,false,false,
+150420,Sociala Medier,hidden,false,false,Undergrupp till Station
+150421,Frivilliga,hidden,false,false,Undergrupp till Station
+150422,Underhållsgruppen,hidden,false,false,Undergrupp till Station
+150423,Skeppare,hidden,false,false,Undergrupp till Station
+150555,Stationsbåten,hidden,false,false,Undergrupp till Station
+150556,RR-förare,hidden,false,false,Undergrupp till Station
+150631,Arbetsgrupp BÅT,hidden,false,false,
+150632,Arbetsgrupp BYGGNAD,hidden,false,false,Undergrupp till Station
+150672,Stationshandledare Första Hjälpen SAR,hidden,false,false,
+150674,RS Kristinehamn Ledningsgrupp,hidden,false,false,Undergrupp till Station
+150675,RS Kristinehamn Skeppare,hidden,false,false,Undergrupp till Station
+150676,Uppdrag & erfarenhetsutbyte,hidden,false,false,Undergrupp till Station
+150690,Rescue Lillie,hidden,false,false,Undergrupp till Station
+150691,RS Råå Stationshus,hidden,false,false,
+151208,Samverkan Hanöbukten (Ystad-Hasslö),public,false,false,Samverkansgrupper
+151209,Övning RS Arkösund,hidden,false,false,
+151214,Allmänt,hidden,false,false,Undergrupp till Station
+151217,Båtklasser,public,true,false,
+151218,Båtklass 90E,hidden,false,false,Båtklasser
+151219,Båtklass Emblad,public,false,false,Båtklasser
+151220,Båtklass Miljöräddningssläp,public,false,false,Båtklasser
+151221,Båtklass Gunnel Larson,public,false,false,Båtklasser
+151222,Båtklass Rescuerunner,public,false,false,Båtklasser
+151224,Båtklass Svävare,public,false,false,Båtklasser
+151225,Båtklass Lars Bjerkander,public,false,false,Båtklasser
+151226,Båtklass Victoria,public,false,false,Båtklasser
+151227,Båtklass Hallberg Rassy,public,false,false,Båtklasser
+151228,Stationshandledare Basic SAR,hidden,false,false,
+151497,Ledningsgrupp,hidden,false,false,Undergrupp till Station
+151499,Båtklass Öppen RIB,public,false,false,Båtklasser
+151500,Transas Navi Sailor,public,false,false,
+151502,Båtklass Postkodlotteriet,public,false,false,Båtklasser
+151503,Samverkan Gotland,hidden,false,false,Samverkansgrupper
+151504,Enheter RS Bergkvara,hidden,false,false,Undergrupp till Station
+151505,RS Mariestad - Skeppargrupp,hidden,false,false,Undergrupp till Station
+151506,RS Mariestad - Utbildningsgrupp,hidden,false,false,Undergrupp till Station
+151507,RS Mariestad - Svävargrupp,hidden,false,false,Undergrupp till Station
+151508,RS Mariestad - Bilder och filmer,hidden,false,false,Undergrupp till Station
+151509,Elev RS Skellefteå,hidden,false,false,
+151558,Aspiranter,hidden,false,false,Undergrupp till Station
+151571,Båt,hidden,false,false,Undergrupp till Station
+151572,Skeppare,hidden,false,false,
+151573,Kommer på larm RS Höganäs,hidden,false,false,
+151574,Basic SAR Core team,hidden,false,false,
+151591,RS Rörös fina gäng,hidden,false,false,Undergrupp till Station
+151592,SGS,hidden,false,false,Undergrupp till Station
+151595,Samverkan RS Södertälje/RS Trosa,hidden,false,false,Samverkansgrupper
+151604,J1 - RS Munsö/Ekerö,hidden,false,false,Undergrupp till Station
+151681,RS Växjö Båtgrupp,hidden,false,false,Undergrupp till Station
+152326,Visningar föredrag RS Arkösund,hidden,false,false,
+152335,Grannstationer till RS Arkösund,hidden,false,false,
+152542,Båtgruppen,hidden,false,false,
+154987,Samverkan Arkösund - Trosa,hidden,false,false,
+155256,RS Rörö Båtansvariga,hidden,false,false,
+155257,RS Luleå Utbildning,hidden,false,false,Undergrupp till Station
+155258,RS Luleå Båt,hidden,false,false,Undergrupp till Station
+155259,RS Luleå Rakel Teknik,hidden,false,false,Undergrupp till Station
+155278,Basic-SAR RS Södertälje,hidden,false,false,Undergrupp till Station
+155283,Life Guard RS Arkösund,hidden,false,false,Undergrupp till Station
+155567,Ledningsgruppen RS Södertälje,hidden,false,false,Undergrupp till Station
+155568,"Köp, sälj och bytes - besättningskläder",public,false,false,
+155571,Besättning 1,hidden,false,false,Undergrupp till Station
+155572,Besättning 2,hidden,false,false,Undergrupp till Station
+155573,Besättning 3,hidden,false,false,Undergrupp till Station
+155595,Elever,hidden,false,false,Undergrupp till Station
+155601,Ledningsgrupp,hidden,false,false,Undergrupp till Station
+156128,Jourlag 1 Gävle,hidden,false,false,Undergrupp till Station
+156129,Jourlag 2 Gävle,hidden,false,false,Undergrupp till Station
+156130,Jourlag 3 Gävle,hidden,false,false,Undergrupp till Station
+156131,Jourlag 4 Gävle,hidden,false,false,Undergrupp till Station
+156134,RS Luleå Externa kontakter och Media,hidden,false,false,Undergrupp till Station
+156139,Instruktör Egen Säkerhet,hidden,false,false,
+157253,RS Hasslö LG,hidden,false,false,Undergrupp till Station
+157254,Bilder RS Åmål,hidden,false,false,Undergrupp till Station
+157257,Utbildnining och sjukvård Kalmar,hidden,false,false,Undergrupp till Station
+157281,Dokument - RS Kållandsö,hidden,false,false,Undergrupp till Station
+157285,Instruktör Basic SAR,hidden,false,false,
+157286,Instruktör Rescuerunner,hidden,false,false,
+158051,Instruktör Gunnel Larson-klassen,hidden,false,false,
+158053,Huvud instruktör FHS,hidden,false,false,
+160430,Interninformation,hidden,false,false,
+160693,Samverkan Norrbotten,public,false,false,Samverkansgrupper
+161231,Befälhavare RS Barsebäckshamn,hidden,false,false,Undergrupp till Station
+161374,"IT, teknik och kommunikation Kalmar",hidden,false,false,Undergrupp till Station
+161375,Båtgruppen Kalmar,hidden,false,false,Undergrupp till Station
+161376,"Bil, svävare och släp Kalmar",hidden,false,false,Undergrupp till Station
+161377,Personal och trivsel Kalmar,hidden,false,false,Undergrupp till Station
+161380,Räddningsskeppare RS Rörö,hidden,false,false,Undergrupp till Station
+161919,Samverkan Sundsvall-Härnösand,public,false,false,Samverkansgrupper
+163282,Dagjouren RS Barsebäckshamn,hidden,false,false,Undergrupp till Station
+163283,Jourlag 1 RS Barsebäckshamn,hidden,false,false,Undergrupp till Station
+163284,Jourlag2 RS Barsebäckshamn,hidden,false,false,Undergrupp till Station
+163285,Jourlag3 RS Barsebäckshamn,hidden,false,false,Undergrupp till Station
+163414,RS Möja WorkVivo-ambassadör,hidden,false,false,Undergrupp till Station
+164009,RS Råå marknadsgrupp,hidden,false,false,Undergrupp till Station
+164010,Besättningsansvariga,hidden,false,false,Undergrupp till Station
+164212,Ledningsgruppen,hidden,false,false,Undergrupp till Station
+165206,LG RS Råå,hidden,false,false,
+166784,Arbetsgrupp Basic SAR,hidden,false,false,Undergrupp till Station
+166815,Samverkan Hörvik o Sölvesborg,hidden,false,false,Samverkansgrupper
+166977,Skeppare Falkenberg,hidden,false,false,Undergrupp till Station
+167024,Elever RS Luleå,hidden,false,false,Undergrupp till Station
+167188,RS Trosa Basic SAR,hidden,false,false,Undergrupp till Station
+167483,Stationshus,hidden,false,false,Undergrupp till Station
+178309,Basic SAR intruktörer Sthlm,hidden,false,false,Undergrupp till Station
+178485,Bilder & Filmer,hidden,false,false,Undergrupp till Station
+178514,Stationsövergripande funktioner (SÖF),hidden,false,false,
+178515,Rekrytering,hidden,false,false,Undergrupp till Station
+178518,Kamratstöd,hidden,false,false,Undergrupp till Station
+179580,Båtklass K15,public,false,false,Båtklasser
+187853,Garmin Navigation och Radar,public,false,false,
+188016,Utbildningsgruppen,hidden,false,false,Undergrupp till Station
+188040,SSRS Båtförflyttningar,hidden,false,false,
+188297,Stationshus RS Hörvik,hidden,false,false,Undergrupp till Station
+190081,RS Uppsala - Befälhavare,hidden,false,false,Undergrupp till Station
+191643,Rsc inlånad båt,hidden,false,false,Undergrupp till Station
+191684,Basic SAR 2025 - elever,hidden,false,false,Samverkansgrupper
+191691,Stationsledning RS Lomma,hidden,false,false,Undergrupp till Station
+191708,Elever-25,hidden,false,false,Undergrupp till Station
+200426,Nynäs Räddningspersoner,hidden,false,false,Undergrupp till Station
+200435,Utbildningsgruppen RP 1,hidden,false,false,Undergrupp till Station
+201443,Rescue K9 #4,hidden,false,false,
+201533,Skeppare RS Ystad,hidden,false,false,
+201539,RS Utbildning & Övning,hidden,false,false,Undergrupp till Station
+201540,RS Uddevalla Evenemang,hidden,false,false,Undergrupp till Station
+201541,RS Uddevalla Båtar,hidden,false,false,Undergrupp till Station
+201954,RS Växjö Kommunikation,hidden,false,false,Undergrupp till Station
+204989,Bokning av lokalen RS Arkösund,hidden,false,false,Undergrupp till Station
+213528,Skepparaspiranter RS Gävle,hidden,false,false,Undergrupp till Station
+213601,Rescue Casque,hidden,false,false,Undergrupp till Station
+213602,Rescue Famous,hidden,false,false,Undergrupp till Station
+213603,Rescue Patrik Dahl,hidden,false,false,Undergrupp till Station
+213953,På Sjön - uppdrag och händelser,hidden,false,false,Undergrupp till Station
+222354,Kommunikation RS Stenungsund,hidden,false,false,Undergrupp till Station
+223273,🛟Jourskeppare Dalarö,hidden,false,false,Undergrupp till Station
+224334,Projekt Simulatorcenter,public,false,false,
+228280,Rescue Stenhammar,hidden,false,false,Undergrupp till Station
+233340,"Instruktörsgruppen – din plats för stöd, struktur och gemenskap",hidden,false,false,
+233451,Fotogalleri,hidden,false,false,Undergrupp till Station
+255774,Kamratstödsgruppen,hidden,false,false,Undergrupp till Station
+260343,SAR Kartan,public,false,false,
+262397,K15 RS Arkösund,hidden,false,false,
+263695,Bunkring RS Hörvik,hidden,false,false,Undergrupp till Station
+267174,RS Luleå Stationshus,private,false,false,Undergrupp till Station
+267587,Skeppare,hidden,false,false,Undergrupp till Station
+271351,Samverkan Kalix Luleå,public,false,false,Samverkansgrupper
+272521,Elevprogram RS Stenungsund,hidden,false,false,Undergrupp till Station
+276012,Testgrupp Workvivo - Tomas K,hidden,false,false,
+276063,Sjöräddare i civila kläder,public,false,false,Samverkansgrupper
+276328,Spons Södertälje,private,false,false,Undergrupp till Station
+276519,K12 - William Eriksson,private,false,false,Undergrupp till Station
+276629,Bengas cirkulär,private,false,false,
+276637,Svävare Henrik Nyström,private,false,false,Undergrupp till Station
+276733,Fartygsbefäl klass 8 utbildningsgrupp RS Stenungsund,private,false,false,Undergrupp till Station
+276829,Roberts testgrupp,hidden,false,false,
+276852,Rakel programmerings-gruppen,hidden,false,false,
+276879,RS Nynäshamn ledningsgrupp,private,false,false,Undergrupp till Station
+276881,Frivillig-gruppen,private,false,false,Undergrupp till Station
+276918,Utbildningsgrupp RS Ystad,private,false,false,Undergrupp till Station
+276919,Övningsgrupp RS Ystad,private,false,false,Undergrupp till Station
+277328,Samverkan Sundsvall & Hudiksvall,public,false,false,Samverkansgrupper
+277355,Fartygsinfo,private,false,false,Undergrupp till Station
+277497,Basic-SAR HT2025 Dalarö,private,false,false,
+278269,Båtklass Räddningsbil,public,false,false,Båtklasser
+278348,Navigationskurs,hidden,false,false,Undergrupp till Station
+278666,"Studiegrupp FBVIII, MBVIII",hidden,false,false,Undergrupp till Station
+278676,Bilder och Filmer,hidden,false,false,Undergrupp till Station
+278710,Nynäshamn Förslagslåda,private,false,false,Undergrupp till Station
+279408,Skötsel av enheter,private,false,false,Undergrupp till Station
+279409,15-01 Mai Rassy,private,false,false,Undergrupp till Station
+279410,12-36 Sten A Olsson,private,false,false,Undergrupp till Station
+279411,8-58 Hans Kjellberg,private,false,false,Undergrupp till Station
+279629,Ralfs sandlåda,hidden,false,false,Samverkansgrupper
+279709,Elever,hidden,false,false,
+279991,Förslagslåda för RS Stenungsund,private,false,false,Undergrupp till Station
+280674,RS Växjö Elev,private,false,false,
+281237,RS Falsterbokanalen 25 år,private,false,false,Undergrupp till Station
+281447,RS Kalix,private,false,false,Huvudgrupp Stationer
+282531,VM Mälaren V.8,public,false,false,Huvudgrupp Stationer
