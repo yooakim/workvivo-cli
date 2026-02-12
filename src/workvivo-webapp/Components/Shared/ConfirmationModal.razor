@@ -1,0 +1,95 @@
+@if (IsVisible)
+{
+    <div class="modal fade show" style="display: block;" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Title</h5>
+                    <button type="button" class="btn-close" @onclick="Cancel" aria-label="Close" disabled="@IsProcessing"></button>
+                </div>
+                <div class="modal-body">
+                    @if (!string.IsNullOrEmpty(ErrorMessage))
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <strong>Error:</strong> @ErrorMessage
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(SuccessMessage))
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @SuccessMessage
+                        </div>
+                    }
+                    <p>@Message</p>
+                    @if (!string.IsNullOrEmpty(DetailMessage))
+                    {
+                        <p class="text-muted small">@DetailMessage</p>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="Cancel" disabled="@IsProcessing">Cancel</button>
+                    <button type="button" class="btn @ConfirmButtonClass" @onclick="Confirm" disabled="@IsProcessing">
+                        @if (IsProcessing)
+                        {
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <text> Processing...</text>
+                        }
+                        else
+                        {
+                            @ConfirmButtonText
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public string Title { get; set; } = "Confirm Action";
+    [Parameter] public string Message { get; set; } = string.Empty;
+    [Parameter] public string? DetailMessage { get; set; }
+    [Parameter] public string ConfirmButtonText { get; set; } = "Confirm";
+    [Parameter] public string ConfirmButtonClass { get; set; } = "btn-primary";
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+
+    private bool IsProcessing { get; set; }
+    private string? ErrorMessage { get; set; }
+    private string? SuccessMessage { get; set; }
+
+    private async Task Confirm()
+    {
+        IsProcessing = true;
+        ErrorMessage = null;
+        SuccessMessage = null;
+        StateHasChanged();
+
+        try
+        {
+            await OnConfirm.InvokeAsync();
+            SuccessMessage = "Operation completed successfully!";
+            StateHasChanged();
+
+            // Auto-close after 1 second on success
+            await Task.Delay(1000);
+            await Cancel();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+            IsProcessing = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task Cancel()
+    {
+        IsProcessing = false;
+        ErrorMessage = null;
+        SuccessMessage = null;
+        await OnCancel.InvokeAsync();
+    }
+}

@@ -1,0 +1,286 @@
+@page "/spaces/{SpaceId}"
+@rendermode InteractiveServer
+@inject IWorkvivoDataService DataService
+@inject NavigationManager Navigation
+
+<PageTitle>Space: @(space?.Name ?? "Loading...")</PageTitle>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@(space?.Name ?? "Space")</li>
+    </ol>
+</nav>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> @errorMessage
+    </div>
+}
+
+@if (successMessage != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @successMessage
+        <button type="button" class="btn-close" @onclick="@(() => successMessage = null)"></button>
+    </div>
+}
+
+@if (isLoading)
+{
+    <div class="loading-spinner">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p>Loading space details...</p>
+    </div>
+}
+else if (space != null)
+{
+    <div class="space-header">
+        <h1>@space.Name</h1>
+        <div class="space-meta">
+            <span class="badge bg-secondary">@space.Visibility</span>
+            @if (space.IsCorporate)
+            {
+                <span class="badge bg-info">Corporate</span>
+            }
+            @if (space.IsMandatory)
+            {
+                <span class="badge bg-warning">Mandatory</span>
+            }
+        </div>
+        @if (!string.IsNullOrEmpty(space.Description))
+        {
+            <p class="text-muted">@space.Description</p>
+        }
+    </div>
+
+    <hr />
+
+    <div class="members-section">
+        <div class="section-header">
+            <h3>Members (@(members?.Count ?? 0))</h3>
+            <button class="btn btn-success" @onclick="ShowAddMemberModal">
+                <span class="bi bi-plus-circle"></span> Add Member
+            </button>
+        </div>
+
+        @if (isLoadingMembers)
+        {
+            <div class="loading-spinner">
+                <div class="spinner-border spinner-border-sm" role="status"></div>
+                <span>Loading members...</span>
+            </div>
+        }
+        else if (members != null && members.Any())
+        {
+            <div class="search-box">
+                <input type="text" class="form-control" placeholder="Search members..." @bind="memberSearchTerm" @bind:event="oninput" />
+            </div>
+
+            <QuickGrid Items="@FilteredMembers" Virtualize="true" class="table table-hover">
+                <PropertyColumn Property="@(u => u.Id)" Title="ID" Sortable="true" />
+                <PropertyColumn Property="@(u => u.Name)" Title="Name" Sortable="true" />
+                <PropertyColumn Property="@(u => u.Email)" Title="Email" Sortable="true" />
+                <PropertyColumn Property="@(u => u.JobTitle)" Title="Job Title" Sortable="true" />
+                <TemplateColumn Title="Actions">
+                    <button class="btn btn-sm btn-danger" @onclick="@(() => ShowRemoveMemberConfirmation(context))">
+                        <span class="bi bi-trash"></span> Remove
+                    </button>
+                </TemplateColumn>
+            </QuickGrid>
+        }
+        else
+        {
+            <p class="text-muted">No members in this space.</p>
+        }
+    </div>
+}
+
+@* Add Member Modal (simplified - uses user ID input) *@
+@if (showAddMemberModal)
+{
+    <div class="modal fade show" style="display: block;" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Member to @space?.Name</h5>
+                    <button type="button" class="btn-close" @onclick="HideAddMemberModal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="userIdInput" class="form-label">User ID</label>
+                        <input type="text" class="form-control" id="userIdInput" @bind="newMemberUserId" placeholder="Enter user ID" />
+                        <div class="form-text">Enter the numeric ID of the user to add.</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="HideAddMemberModal">Cancel</button>
+                    <button type="button" class="btn btn-primary" @onclick="ConfirmAddMember" disabled="@string.IsNullOrWhiteSpace(newMemberUserId)">Add Member</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+<ConfirmationModal 
+    IsVisible="@showRemoveConfirmation"
+    Title="Remove Member"
+    Message="@confirmationMessage"
+    DetailMessage="@confirmationDetail"
+    ConfirmButtonText="Remove"
+    ConfirmButtonClass="btn-danger"
+    OnConfirm="ConfirmRemoveMember"
+    OnCancel="HideRemoveConfirmation" />
+
+@code {
+    [Parameter] public string SpaceId { get; set; } = string.Empty;
+
+    private Space? space;
+    private List<User>? members;
+    private bool isLoading = true;
+    private bool isLoadingMembers = false;
+    private string? errorMessage;
+    private string? successMessage;
+    private string memberSearchTerm = string.Empty;
+
+    private bool showAddMemberModal = false;
+    private string newMemberUserId = string.Empty;
+
+    private bool showRemoveConfirmation = false;
+    private User? memberToRemove;
+    private string confirmationMessage = string.Empty;
+    private string confirmationDetail = string.Empty;
+
+    private IQueryable<User> FilteredMembers
+    {
+        get
+        {
+            if (members == null) return Enumerable.Empty<User>().AsQueryable();
+
+            if (string.IsNullOrWhiteSpace(memberSearchTerm))
+                return members.AsQueryable();
+
+            var searchLower = memberSearchTerm.ToLowerInvariant();
+            return members.Where(u =>
+                u.Name.ToLowerInvariant().Contains(searchLower) ||
+                u.Email.ToLowerInvariant().Contains(searchLower) ||
+                u.Id.ToString().Contains(searchLower)
+            ).AsQueryable();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            // Load space details
+            var spaces = await DataService.GetCachedSpacesAsync();
+            space = spaces.FirstOrDefault(s => s.Id.ToString() == SpaceId);
+
+            if (space == null)
+            {
+                errorMessage = $"Space with ID {SpaceId} not found.";
+                return;
+            }
+
+            // Load members
+            await LoadMembers();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to load space: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadMembers()
+    {
+        try
+        {
+            isLoadingMembers = true;
+            members = await DataService.GetSpaceMembersAsync(SpaceId);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to load members: {ex.Message}";
+        }
+        finally
+        {
+            isLoadingMembers = false;
+        }
+    }
+
+    private void ShowAddMemberModal()
+    {
+        newMemberUserId = string.Empty;
+        showAddMemberModal = true;
+    }
+
+    private void HideAddMemberModal()
+    {
+        showAddMemberModal = false;
+    }
+
+    private void ShowRemoveMemberConfirmation(User user)
+    {
+        memberToRemove = user;
+        confirmationMessage = $"Are you sure you want to remove {user.Name} from {space?.Name}?";
+        confirmationDetail = $"User: {user.Email} (ID: {user.Id})";
+        showRemoveConfirmation = true;
+    }
+
+    private void HideRemoveConfirmation()
+    {
+        showRemoveConfirmation = false;
+        memberToRemove = null;
+    }
+
+    private async Task ConfirmAddMember()
+    {
+        try
+        {
+            HideAddMemberModal();
+            await DataService.AddUserToSpaceAsync(SpaceId, newMemberUserId);
+            successMessage = $"User {newMemberUserId} added to space successfully!";
+            await LoadMembers();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to add member: {ex.Message}";
+        }
+    }
+
+    private async Task ConfirmRemoveMember()
+    {
+        if (memberToRemove == null) return;
+
+        try
+        {
+            await DataService.RemoveUserFromSpaceAsync(SpaceId, memberToRemove.Id.ToString());
+            successMessage = $"{memberToRemove.Name} removed from space successfully!";
+            await LoadMembers();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to remove member: {ex.Message}";
+            throw; // Re-throw to let modal handle it
+        }
+    }
+}

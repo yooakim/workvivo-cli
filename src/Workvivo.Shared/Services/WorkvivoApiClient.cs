@@ -254,4 +254,53 @@ public class WorkvivoApiClient : IWorkvivoApiClient
 
         return allUsers;
     }
+
+    public async Task AddUserToSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(spaceId))
+        {
+            throw new ArgumentException("Space ID cannot be null or empty.", nameof(spaceId));
+        }
+
+        if (string.IsNullOrWhiteSpace(userId))
+        {
+            throw new ArgumentException("User ID cannot be null or empty.", nameof(userId));
+        }
+
+        var url = $"spaces/{spaceId}/members";
+        var payload = new { userId };
+
+        var response = await _httpClient.PostAsJsonAsync(url, payload, AppJsonSerializerContext.Default.Options, cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new HttpRequestException(
+                $"Failed to add user {userId} to space {spaceId}. Status: {response.StatusCode}, Error: {errorContent}");
+        }
+    }
+
+    public async Task RemoveUserFromSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(spaceId))
+        {
+            throw new ArgumentException("Space ID cannot be null or empty.", nameof(spaceId));
+        }
+
+        if (string.IsNullOrWhiteSpace(userId))
+        {
+            throw new ArgumentException("User ID cannot be null or empty.", nameof(userId));
+        }
+
+        var url = $"spaces/{spaceId}/members/{userId}";
+
+        var response = await _httpClient.DeleteAsync(url, cancellationToken);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync(cancellationToken);
+            throw new HttpRequestException(
+                $"Failed to remove user {userId} from space {spaceId}. Status: {response.StatusCode}, Error: {errorContent}");
+        }
+    }
 }

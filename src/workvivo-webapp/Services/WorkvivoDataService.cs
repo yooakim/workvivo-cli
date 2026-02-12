@@ -8,7 +8,10 @@ public interface IWorkvivoDataService
 {
     Task<List<User>> GetCachedUsersAsync(CancellationToken cancellationToken = default);
     Task<List<Space>> GetCachedSpacesAsync(CancellationToken cancellationToken = default);
+    Task<List<User>> GetSpaceMembersAsync(string spaceId, CancellationToken cancellationToken = default);
     Task RefreshDataAsync(CancellationToken cancellationToken = default);
+    Task AddUserToSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default);
+    Task RemoveUserFromSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default);
     DateTime? LastRefreshTime { get; }
 }
 
@@ -21,6 +24,7 @@ public class WorkvivoDataService : IWorkvivoDataService
     private const string UsersCacheKey = "users-all";
     private const string SpacesCacheKey = "spaces-all";
     private const string LastRefreshCacheKey = "last-refresh-time";
+    private const string SpaceMembersCacheKeyPrefix = "space-members-";
 
     public DateTime? LastRefreshTime => _cache.Get<DateTime?>(LastRefreshCacheKey);
 
@@ -94,5 +98,50 @@ public class WorkvivoDataService : IWorkvivoDataService
         );
 
         _logger.LogInformation("Data refresh complete");
+    }
+
+    public async Task<List<User>> GetSpaceMembersAsync(string spaceId, CancellationToken cancellationToken = default)
+    {
+        var cacheKey = $"{SpaceMembersCacheKeyPrefix}{spaceId}";
+
+        if (_cache.TryGetValue<List<User>>(cacheKey, out var cachedMembers) && cachedMembers != null)
+        {
+            _logger.LogDebug("Returning cached members for space {SpaceId} (count: {Count})", spaceId, cachedMembers.Count);
+            return cachedMembers;
+        }
+
+        _logger.LogInformation("Fetching members for space {SpaceId} from API...", spaceId);
+        var members = await _apiClient.GetAllSpaceUsersAsync(spaceId, cancellationToken);
+
+        var cacheExpiration = _configuration.GetValue<int>("CacheSettings:ExpirationMinutes", 5);
+        var cacheOptions = new MemoryCacheEntryOptions()
+            .SetSlidingExpiration(TimeSpan.FromMinutes(cacheExpiration));
+
+        _cache.Set(cacheKey, members, cacheOptions);
+
+        _logger.LogInformation("Cached {Count} members for space {SpaceId}", members.Count, spaceId);
+        return members;
+    }
+
+    public async Task AddUserToSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Adding user {UserId} to space {SpaceId}...", userId, spaceId);
+
+        await _apiClient.AddUserToSpaceAsync(spaceId, userId, cancellationToken);
+
+        // Invalidate affected caches
+        _cache.Remove($"{SpaceMembersCacheKeyPrefix}{spaceId}");
+        _logger.LogInformation("Successfully added user {UserId} to space {SpaceId}", userId, spaceId);
+    }
+
+    public async Task RemoveUserFromSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default)
+    {
+        _logger.LogInformation("Removing user {UserId} from space {SpaceId}...", userId, spaceId);
+
+        await _apiClient.RemoveUserFromSpaceAsync(spaceId, userId, cancellationToken);
+
+        // Invalidate affected caches
+        _cache.Remove($"{SpaceMembersCacheKeyPrefix}{spaceId}");
+        _logger.LogInformation("Successfully removed user {UserId} from space {SpaceId}", userId, spaceId);
     }
 }

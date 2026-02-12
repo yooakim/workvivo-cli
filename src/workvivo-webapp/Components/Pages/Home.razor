@@ -74,10 +74,13 @@
             <input type="text" class="form-control" placeholder="Search spaces..." @bind="spaceSearchTerm" @bind:event="oninput" />
         </div>
         
-        <QuickGrid Items="@FilteredSpaces" Virtualize="true">
+        <QuickGrid Items="@FilteredSpaces" Virtualize="true" class="table table-hover clickable-grid">
             <PropertyColumn Property="@(s => s.Id)" Title="ID" Sortable="true" />
             <PropertyColumn Property="@(s => s.Name)" Title="Name" Sortable="true" />
             <PropertyColumn Property="@(s => s.Visibility)" Title="Visibility" Sortable="true" />
+            <TemplateColumn Title="Actions">
+                <a href="/spaces/@context.Id" class="btn btn-sm btn-primary">View Members</a>
+            </TemplateColumn>
         </QuickGrid>
     }
 </div>

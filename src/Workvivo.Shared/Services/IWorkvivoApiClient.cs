@@ -46,4 +46,22 @@ public interface IWorkvivoApiClient
     /// Gets all users in a specific space by fetching all pages.
     /// </summary>
     Task<List<User>> GetAllSpaceUsersAsync(string spaceId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Adds a user to a space.
+    /// </summary>
+    /// <param name="spaceId">The ID of the space.</param>
+    /// <param name="userId">The ID of the user to add.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <exception cref="HttpRequestException">Thrown when the API request fails.</exception>
+    Task AddUserToSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Removes a user from a space.
+    /// </summary>
+    /// <param name="spaceId">The ID of the space.</param>
+    /// <param name="userId">The ID of the user to remove.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <exception cref="HttpRequestException">Thrown when the API request fails.</exception>
+    Task RemoveUserFromSpaceAsync(string spaceId, string userId, CancellationToken cancellationToken = default);
 }
