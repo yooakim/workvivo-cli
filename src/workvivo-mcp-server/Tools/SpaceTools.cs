@@ -116,9 +116,8 @@ public class SpaceTools
         {
             var allSpaces = await _apiClient.GetAllSpacesAsync(cancellationToken: cancellationToken);
             
-            var nameQueryLower = nameQuery.ToLower();
             var matches = allSpaces
-                .Where(s => s.Name?.ToLower().Contains(nameQueryLower) == true)
+                .Where(s => s.Name?.Contains(nameQuery, StringComparison.OrdinalIgnoreCase) == true)
                 .ToList();
             
             return matches;

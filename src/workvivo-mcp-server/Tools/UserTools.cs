@@ -26,7 +26,7 @@ public class UserTools
     {
         try
         {
-            var response = await _apiClient.GetUsersAsync(skip, take, inSpaces, expand, cancellationToken);
+            var response = await _apiClient.GetUsersAsync(skip: skip, take: take, inSpaces: inSpaces, expand: expand, cancellationToken: cancellationToken);
             return response.Data;
         }
         catch (Exception ex)
@@ -64,13 +64,12 @@ public class UserTools
         {
             var allUsers = await _apiClient.GetAllUsersAsync(cancellationToken: cancellationToken);
             
-            var nameQueryLower = nameQuery.ToLower();
             var matches = allUsers
                 .Where(u => 
-                    u.DisplayName?.ToLower().Contains(nameQueryLower) == true ||
-                    u.Name?.ToLower().Contains(nameQueryLower) == true ||
-                    u.FirstName?.ToLower().Contains(nameQueryLower) == true ||
-                    u.LastName?.ToLower().Contains(nameQueryLower) == true)
+                    u.DisplayName?.Contains(nameQuery, StringComparison.OrdinalIgnoreCase) == true ||
+                    u.Name?.Contains(nameQuery, StringComparison.OrdinalIgnoreCase) == true ||
+                    u.FirstName?.Contains(nameQuery, StringComparison.OrdinalIgnoreCase) == true ||
+                    u.LastName?.Contains(nameQuery, StringComparison.OrdinalIgnoreCase) == true)
                 .ToList();
             
             return matches;
@@ -92,9 +91,8 @@ public class UserTools
         {
             var allUsers = await _apiClient.GetAllUsersAsync(cancellationToken: cancellationToken);
             
-            var emailQueryLower = emailQuery.ToLower();
             var matches = allUsers
-                .Where(u => u.Email?.ToLower().Contains(emailQueryLower) == true)
+                .Where(u => u.Email?.Contains(emailQuery, StringComparison.OrdinalIgnoreCase) == true)
                 .ToList();
             
             return matches;
@@ -115,7 +113,7 @@ public class UserTools
     {
         try
         {
-            return await _apiClient.GetAllUsersAsync(inSpaces, expand, cancellationToken);
+            return await _apiClient.GetAllUsersAsync(inSpaces: inSpaces, expand: expand, cancellationToken: cancellationToken);
         }
         catch (Exception ex)
         {

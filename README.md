@@ -2,7 +2,7 @@
 
 NB: This is an early version of the Workvivo CLI. At this time it is read-only, not all features are implemented.
 
-A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API. The tool workrs on Windows, macOS and Linux.
+A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API. The tool works on Windows, macOS and Linux.
 
 ## 🌐 Web Application (Experimental)
 

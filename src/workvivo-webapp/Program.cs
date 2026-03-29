@@ -9,6 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 // Configure WorkvivoSettings from configuration
+builder.Configuration.AddEnvironmentVariables(prefix: "WORKVIVO_");
 var settings = new WorkvivoSettings();
 builder.Configuration.Bind(settings);
 
