@@ -22,6 +22,7 @@ using Spectre.Console.Cli;
 using WorkvivoCli.Commands;
 using Workvivo.Shared.Configuration;
 using WorkvivoCli.Infrastructure;
+using Microsoft.Extensions.Caching.Memory;
 using Workvivo.Shared.Services;
 
 // Build configuration from appsettings.json, user-secrets, and environment variables
@@ -58,7 +59,13 @@ if (!isHelpOrVersion)
 // Configure dependency injection
 var services = new ServiceCollection();
 services.AddSingleton(settings);
-services.AddHttpClient<IWorkvivoApiClient, WorkvivoApiClient>();
+services.AddMemoryCache();
+services.AddHttpClient<WorkvivoApiClient>();
+services.AddTransient<IWorkvivoApiClient>(sp =>
+    new CachingWorkvivoApiClient(
+        sp.GetRequiredService<WorkvivoApiClient>(),
+        sp.GetRequiredService<IMemoryCache>(),
+        sp.GetRequiredService<WorkvivoSettings>()));
 
 // Create the Spectre.Console.Cli app with DI support
 var registrar = new TypeRegistrar(services);

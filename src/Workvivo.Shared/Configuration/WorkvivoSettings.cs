@@ -41,6 +41,12 @@ public class WorkvivoSettings
     public string? OrganizationId { get; set; }
 
     /// <summary>
+    /// Gets or sets the cache TTL in minutes for API responses.
+    /// Default is 5 minutes. Set to 0 to disable caching.
+    /// </summary>
+    public int CacheTtlMinutes { get; set; } = 5;
+
+    /// <summary>
     /// Validates that all required settings are configured.
     /// </summary>
     /// <exception cref="InvalidOperationException">Thrown when required settings are missing.</exception>

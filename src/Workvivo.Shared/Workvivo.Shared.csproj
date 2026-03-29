@@ -10,9 +10,12 @@
     <!-- Configuration -->
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.2" />
-    
+
     <!-- Dependency Injection & HTTP -->
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.0" />
+
+    <!-- Caching -->
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="10.0.0" />
   </ItemGroup>
 
 </Project>
