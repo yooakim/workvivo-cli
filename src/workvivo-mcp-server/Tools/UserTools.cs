@@ -24,6 +24,7 @@ public class UserTools
         [Description("Expand related objects (e.g., 'teams')")] string? expand = null,
         CancellationToken cancellationToken = default)
     {
+        take = Math.Clamp(take, 1, 100);
         try
         {
             var response = await _apiClient.GetUsersAsync(skip: skip, take: take, inSpaces: inSpaces, expand: expand, cancellationToken: cancellationToken);

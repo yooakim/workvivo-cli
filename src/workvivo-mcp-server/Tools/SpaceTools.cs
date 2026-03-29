@@ -23,6 +23,7 @@ public class SpaceTools
         [Description("Filter spaces by type (e.g., 'Corporate', 'Community')")] string? type = null,
         CancellationToken cancellationToken = default)
     {
+        take = Math.Clamp(take, 1, 100);
         try
         {
             var response = await _apiClient.GetSpacesAsync(skip, take, type, cancellationToken);
@@ -60,6 +61,7 @@ public class SpaceTools
         [Description("Number of users to return (default: 50, max: 100)")] int take = 50,
         CancellationToken cancellationToken = default)
     {
+        take = Math.Clamp(take, 1, 100);
         try
         {
             var response = await _apiClient.GetSpaceUsersAsync(spaceId, skip, take, cancellationToken);
