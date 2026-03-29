@@ -2,7 +2,46 @@
 
 NB: This is an early version of the Workvivo CLI. At this time it is read-only, not all features are implemented.
 
-A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API. The tool workrs on Windows, macOS and Linux.
+A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API. The tool works on Windows, macOS and Linux.
+
+## 🌐 Web Application (Experimental)
+
+This repository now includes an **experimental Blazor Server web app** that displays Workvivo users and spaces in a modern web interface with QuickGrid tables.
+
+**Features:**
+- Tabbed interface for Users and Spaces
+- Sortable columns with real-time search/filtering
+- In-memory caching for fast performance
+- Responsive design (works on mobile/tablet)
+- Shares configuration with the CLI (same credentials)
+
+👉 **[Get Started with the Web App](src/workvivo-webapp/README.md)**
+
+```bash
+# Run the web app
+cd src/workvivo-webapp
+dotnet watch run
+# Open https://localhost:5001 in your browser
+```
+
+---
+
+## 🤖 MCP Server for AI Assistants
+
+This repository now includes a **Model Context Protocol (MCP) server** that enables AI assistants like Claude, GitHub Copilot, and VS Code to interact with your Workvivo data.
+
+**What can AI assistants do with the MCP server?**
+- Answer questions about your organization ("How many users are in the Marketing space?")
+- Search for users by name or email
+- List spaces and their members
+- Help troubleshoot membership issues
+- Generate reports about your organization structure
+
+**11 tools available:** ListUsers, GetUser, SearchUsersByName, SearchUsersByEmail, GetAllUsers, ListSpaces, GetSpace, ListSpaceUsers, GetAllSpaceUsers, GetAllSpaces, SearchSpacesByName
+
+👉 **[Get Started with the MCP Server](src/workvivo-mcp-server/README.md)**
+
+---
 
 ## Quick Start
 

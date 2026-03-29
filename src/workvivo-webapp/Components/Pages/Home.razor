@@ -1,0 +1,186 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject IWorkvivoDataService DataService
+
+<PageTitle>Workvivo - Users & Spaces</PageTitle>
+
+<h1>Workvivo Data Explorer</h1>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> @errorMessage
+    </div>
+}
+
+<div class="status-bar">
+    <span class="last-refresh">
+        @if (DataService.LastRefreshTime.HasValue)
+        {
+            <text>Last refresh: @DataService.LastRefreshTime.Value.ToLocalTime().ToString("g")</text>
+        }
+        else
+        {
+            <text>No data cached</text>
+        }
+    </span>
+    <button class="btn btn-primary" @onclick="RefreshData" disabled="@isRefreshing">
+        @if (isRefreshing)
+        {
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <text> Refreshing...</text>
+        }
+        else
+        {
+            <text>Refresh Data</text>
+        }
+    </button>
+</div>
+
+<div class="tabs">
+    <button class="tab-button @(activeTab == "users" ? "active" : "")" @onclick="@(() => SetActiveTab("users"))">
+        Users (@(users?.Count ?? 0))
+    </button>
+    <button class="tab-button @(activeTab == "spaces" ? "active" : "")" @onclick="@(() => SetActiveTab("spaces"))">
+        Spaces (@(spaces?.Count ?? 0))
+    </button>
+</div>
+
+<div class="tab-content">
+    @if (isLoading)
+    {
+        <div class="loading-spinner">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading data from Workvivo API...</p>
+        </div>
+    }
+    else if (activeTab == "users")
+    {
+        <div class="search-box">
+            <input type="text" class="form-control" placeholder="Search users..." @bind="userSearchTerm" @bind:event="oninput" />
+        </div>
+        
+        <QuickGrid Items="@FilteredUsers" Virtualize="true">
+            <PropertyColumn Property="@(u => u.Id)" Title="ID" Sortable="true" />
+            <PropertyColumn Property="@(u => u.Name)" Title="Name" Sortable="true" />
+            <PropertyColumn Property="@(u => u.Email)" Title="Email" Sortable="true" />
+        </QuickGrid>
+    }
+    else if (activeTab == "spaces")
+    {
+        <div class="search-box">
+            <input type="text" class="form-control" placeholder="Search spaces..." @bind="spaceSearchTerm" @bind:event="oninput" />
+        </div>
+        
+        <QuickGrid Items="@FilteredSpaces" Virtualize="true">
+            <PropertyColumn Property="@(s => s.Id)" Title="ID" Sortable="true" />
+            <PropertyColumn Property="@(s => s.Name)" Title="Name" Sortable="true" />
+            <PropertyColumn Property="@(s => s.Visibility)" Title="Visibility" Sortable="true" />
+        </QuickGrid>
+    }
+</div>
+
+@code {
+    private List<User>? users;
+    private List<Space>? spaces;
+    private string activeTab = "users";
+    private bool isLoading = true;
+    private bool isRefreshing = false;
+    private string? errorMessage;
+    private string userSearchTerm = string.Empty;
+    private string spaceSearchTerm = string.Empty;
+
+    private IQueryable<User> FilteredUsers
+    {
+        get
+        {
+            if (users == null) return Enumerable.Empty<User>().AsQueryable();
+            
+            if (string.IsNullOrWhiteSpace(userSearchTerm))
+                return users.AsQueryable();
+
+            var searchLower = userSearchTerm.ToLowerInvariant();
+            return users.Where(u => 
+                u.Name.ToLowerInvariant().Contains(searchLower) ||
+                u.Email.ToLowerInvariant().Contains(searchLower) ||
+                u.Id.ToString().Contains(searchLower)
+            ).AsQueryable();
+        }
+    }
+
+    private IQueryable<Space> FilteredSpaces
+    {
+        get
+        {
+            if (spaces == null) return Enumerable.Empty<Space>().AsQueryable();
+            
+            if (string.IsNullOrWhiteSpace(spaceSearchTerm))
+                return spaces.AsQueryable();
+
+            var searchLower = spaceSearchTerm.ToLowerInvariant();
+            return spaces.Where(s => 
+                s.Name.ToLowerInvariant().Contains(searchLower) ||
+                s.Visibility.ToLowerInvariant().Contains(searchLower) ||
+                s.Id.ToString().Contains(searchLower)
+            ).AsQueryable();
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try
+        {
+            isLoading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            users = await DataService.GetCachedUsersAsync();
+            spaces = await DataService.GetCachedSpacesAsync();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to load data: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task RefreshData()
+    {
+        try
+        {
+            isRefreshing = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            await DataService.RefreshDataAsync();
+            users = await DataService.GetCachedUsersAsync();
+            spaces = await DataService.GetCachedSpacesAsync();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Failed to refresh data: {ex.Message}";
+        }
+        finally
+        {
+            isRefreshing = false;
+            StateHasChanged();
+        }
+    }
+
+    private void SetActiveTab(string tab)
+    {
+        activeTab = tab;
+    }
+}
+
