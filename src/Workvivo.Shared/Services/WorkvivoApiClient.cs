@@ -27,6 +27,7 @@ public class WorkvivoApiClient : IWorkvivoApiClient
         int skip = 0,
         int take = 50,
         string? inSpaces = null,
+        string? inTeams = null,
         string? expand = null,
         CancellationToken cancellationToken = default)
     {
@@ -39,6 +40,11 @@ public class WorkvivoApiClient : IWorkvivoApiClient
         if (!string.IsNullOrWhiteSpace(inSpaces))
         {
             queryParams.Add($"in_spaces={inSpaces}");
+        }
+
+        if (!string.IsNullOrWhiteSpace(inTeams))
+        {
+            queryParams.Add($"in_teams={inTeams}");
         }
 
         if (!string.IsNullOrWhiteSpace(expand))
@@ -69,6 +75,7 @@ public class WorkvivoApiClient : IWorkvivoApiClient
 
     public async Task<List<User>> GetAllUsersAsync(
         string? inSpaces = null,
+        string? inTeams = null,
         string? expand = null,
         CancellationToken cancellationToken = default)
     {
@@ -78,7 +85,7 @@ public class WorkvivoApiClient : IWorkvivoApiClient
 
         while (true)
         {
-            var response = await GetUsersAsync(skip, take, inSpaces, expand, cancellationToken);
+            var response = await GetUsersAsync(skip, take, inSpaces, inTeams, expand, cancellationToken);
             allUsers.AddRange(response.Data);
 
             if (string.IsNullOrWhiteSpace(response.Meta?.Pagination?.NextPage))

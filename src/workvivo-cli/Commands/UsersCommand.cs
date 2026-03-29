@@ -49,6 +49,10 @@ public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
         [Description("Filter users by space IDs (pipe-separated, e.g., space1|space2)")]
         public string? InSpaces { get; init; }
 
+        [CommandOption("--in-teams")]
+        [Description("Filter users by team IDs (pipe-separated, e.g., 1|2|3)")]
+        public string? InTeams { get; init; }
+
         [CommandOption("--expand")]
         [Description("Expand related objects (e.g., teams)")]
         public string? Expand { get; init; }
@@ -73,7 +77,7 @@ public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
                     Console.Error.WriteLine("Fetching all users...");
                 }
 
-                var allUsers = await _apiClient.GetAllUsersAsync(settings.InSpaces, settings.Expand);
+                var allUsers = await _apiClient.GetAllUsersAsync(settings.InSpaces, settings.InTeams, settings.Expand);
                 formatter.FormatUsers(allUsers);
 
                 if (!machineReadable)
@@ -83,7 +87,7 @@ public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
             }
             else
             {
-                var result = await _apiClient.GetUsersAsync(settings.Skip, settings.Take, settings.InSpaces, settings.Expand);
+                var result = await _apiClient.GetUsersAsync(settings.Skip, settings.Take, settings.InSpaces, settings.InTeams, settings.Expand);
                 formatter.FormatUsers(result.Data);
 
                 if (!machineReadable && result.Total > 0)

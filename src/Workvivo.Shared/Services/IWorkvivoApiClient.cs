@@ -10,12 +10,12 @@ public interface IWorkvivoApiClient
     /// <summary>
     /// Gets a list of users with optional filtering and pagination.
     /// </summary>
-    Task<PagedResponse<User>> GetUsersAsync(int skip = 0, int take = 50, string? inSpaces = null, string? expand = null, CancellationToken cancellationToken = default);
+    Task<PagedResponse<User>> GetUsersAsync(int skip = 0, int take = 50, string? inSpaces = null, string? inTeams = null, string? expand = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets all users by fetching all pages.
     /// </summary>
-    Task<List<User>> GetAllUsersAsync(string? inSpaces = null, string? expand = null, CancellationToken cancellationToken = default);
+    Task<List<User>> GetAllUsersAsync(string? inSpaces = null, string? inTeams = null, string? expand = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Gets a specific user by ID.
