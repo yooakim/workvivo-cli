@@ -46,7 +46,11 @@ catch (InvalidOperationException ex)
 var builder = Host.CreateEmptyApplicationBuilder(settings: null);
 
 builder.Services.AddSingleton(settings);
-builder.Services.AddHttpClient<IWorkvivoApiClient, WorkvivoApiClient>();
+builder.Services.AddHttpClient<WorkvivoApiClient>();
+builder.Services.AddSingleton<IWorkvivoApiClient>(sp =>
+    new FileBackedCachingWorkvivoApiClient(
+        sp.GetRequiredService<WorkvivoApiClient>(),
+        sp.GetRequiredService<WorkvivoSettings>()));
 
 builder.Services
     .AddMcpServer()

@@ -47,6 +47,17 @@ public class WorkvivoSettings
     public int CacheTtlMinutes { get; set; } = 5;
 
     /// <summary>
+    /// Gets or sets the directory used for file-backed cache storage.
+    /// Default: ~/.workvivo/cache (cross-platform).
+    /// Can be overridden by WORKVIVO_CACHEDIRECTORY environment variable.
+    /// </summary>
+    public string CacheDirectory { get; set; } =
+        Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            ".workvivo",
+            "cache");
+
+    /// <summary>
     /// Validates that all required settings are configured.
     /// </summary>
     /// <exception cref="InvalidOperationException">Thrown when required settings are missing.</exception>
