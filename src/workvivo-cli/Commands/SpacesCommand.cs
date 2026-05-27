@@ -55,7 +55,7 @@ public class ListSpacesCommand : AsyncCommand<ListSpacesCommand.Settings>
         public bool All { get; init; }
     }
 
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    protected override async Task<int> ExecuteAsync(CommandContext context, Settings settings, CancellationToken cancellationToken)
     {
         try
         {
@@ -119,7 +119,7 @@ public class GetSpaceCommand : AsyncCommand<GetSpaceCommand.Settings>
         public string SpaceId { get; init; } = string.Empty;
     }
 
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    protected override async Task<int> ExecuteAsync(CommandContext context, Settings settings, CancellationToken cancellationToken)
     {
         try
         {
@@ -174,7 +174,7 @@ public class SpaceUsersCommand : AsyncCommand<SpaceUsersCommand.Settings>
         public bool All { get; init; }
     }
 
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    protected override async Task<int> ExecuteAsync(CommandContext context, Settings settings, CancellationToken cancellationToken)
     {
         try
         {

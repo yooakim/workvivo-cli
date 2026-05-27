@@ -59,7 +59,7 @@ public class ListUsersCommand : AsyncCommand<ListUsersCommand.Settings>
         public bool All { get; init; }
     }
 
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    protected override async Task<int> ExecuteAsync(CommandContext context, Settings settings, CancellationToken cancellationToken)
     {
         try
         {
@@ -127,7 +127,7 @@ public class GetUserCommand : AsyncCommand<GetUserCommand.Settings>
         public string? Expand { get; init; }
     }
 
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    protected override async Task<int> ExecuteAsync(CommandContext context, Settings settings, CancellationToken cancellationToken)
     {
         try
         {
