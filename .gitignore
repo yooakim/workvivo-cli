@@ -73,3 +73,7 @@ secrets.json
 *.temp
 *.bak
 *.orig
+
+# Local Workvivo data exports (contain personal data)
+src/workvivo-cli/users.json
+src/workvivo-cli/spaces.json
