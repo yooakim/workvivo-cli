@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="src/workvivo-cli/WorkvivoCli.csproj" />
   <Project Path="src/Workvivo.Shared/Workvivo.Shared.csproj" />
+  <Project Path="src/workvivo-mcp-server/WorkvivoMcpServer.csproj" />
   <Project Path="src/workvivo-webapp/workvivo-webapp.csproj" />
   <Project Path="tests/WorkvivoCli.Tests/WorkvivoCli.Tests.csproj" />
 </Solution>

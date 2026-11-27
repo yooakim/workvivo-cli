@@ -138,7 +138,7 @@ See the [README](../README.md#configuration) for all configuration options.
 # Format code (auto-fix)
 dotnet format WorkvivoCli.slnx
 
-# Verify formatting without changes (for CI)
+# Verify formatting without changes (not enforced by any workflow)
 dotnet format WorkvivoCli.slnx --verify-no-changes
 ```
 
@@ -149,7 +149,7 @@ dotnet format WorkvivoCli.slnx --verify-no-changes
 dotnet test
 
 # Run tests with coverage
-dotnet test /p:CollectCoverage=true
+dotnet test --collect:"XPlat Code Coverage"
 
 # Run a single test by filter
 dotnet test --filter "FullyQualifiedName~WorkvivoSettingsTests.Validate_WithValidSettings_ShouldNotThrow"
