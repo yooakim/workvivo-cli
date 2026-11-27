@@ -71,6 +71,7 @@ wv [command] [subcommand] [arguments] [options]
 ### Global Options
 
 - `--json`: Output results in JSON format (default: false)
+- `--csv`: Output results in CSV format (default: false). Cannot be combined with `--json`
 - `--help`, `-h`, `-?`: Show help information
 - `--version`: Show version information
 
@@ -190,9 +191,21 @@ Machine-readable JSON output for automation:
 ]
 ```
 
+### CSV Format
+
+Comma-separated output (RFC 4180) with a header row, for spreadsheets and data tools. Each resource type has a fixed set of columns:
+
+```bash
+wv users list --csv
+```
+
+```csv
+id,external_id,email,name,display_name,first_name,last_name,job_title,has_access
+```
+
 ### Redirecting Output to Files
 
-When redirecting JSON output to files, only the data is written to stdout:
+When redirecting JSON or CSV output to files, only the data is written to stdout:
 
 ```bash
 # Clean JSON output - no log messages
@@ -200,9 +213,12 @@ wv spaces users 82364 --json --all > spaces.json
 
 # If you see any warnings/errors, they'll be on stderr (terminal)
 # and won't contaminate your JSON file
+
+# Same for CSV
+wv users list --csv --all > users.csv
 ```
 
-Log messages are always sent to stderr, keeping your JSON files clean.
+Log messages are always sent to stderr, keeping your JSON and CSV files clean.
 
 ## Error Handling
 

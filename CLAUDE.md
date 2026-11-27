@@ -19,12 +19,12 @@ dotnet run --project src/WorkvivoCli.csproj -- users list --help
 dotnet test
 
 # Run tests with coverage
-dotnet test /p:CollectCoverage=true
+dotnet test --collect:"XPlat Code Coverage"
 
 # Run a single test by name
 dotnet test --filter "DisplayName~Validate_WithValidSettings"
 
-# Format check (CI)
+# Format check (verify only, writes nothing; not enforced by any workflow)
 dotnet format WorkvivoCli.slnx --verify-no-changes
 
 # Format fix

@@ -28,7 +28,7 @@ dotnet publish src/WorkvivoCli.csproj -c Release -r linux-x64 --self-contained
 dotnet test
 
 # Run tests with coverage
-dotnet test /p:CollectCoverage=true
+dotnet test --collect:"XPlat Code Coverage"
 
 # Run a single test by filter
 dotnet test --filter "FullyQualifiedName~WorkvivoSettingsTests.Validate_WithValidSettings_ShouldNotThrow"
@@ -40,7 +40,7 @@ dotnet test --filter "DisplayName~Validate_WithValidSettings"
 # Format code (auto-fix)
 dotnet format WorkvivoCli.slnx
 
-# Verify formatting without changes (for CI)
+# Verify formatting without changes (not enforced by any workflow)
 dotnet format WorkvivoCli.slnx --verify-no-changes
 ```
 
