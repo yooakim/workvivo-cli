@@ -17,7 +17,7 @@ build_platform() {
 
     echo ""
     echo "Building for $platform_name ($rid)..."
-    dotnet publish src/WorkvivoCli.csproj \
+    dotnet publish src/workvivo-cli/WorkvivoCli.csproj \
         -c Release \
         -r $rid \
         --self-contained \

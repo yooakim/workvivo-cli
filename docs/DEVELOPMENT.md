@@ -1,6 +1,6 @@
 # Development Guide
 
-This guide covers building, testing, and contributing to the Workvivo CLI.
+This guide covers building, testing, and contributing to the Workvivo CLI and the Workvivo MCP server that lives in the same repository.
 
 ## Prerequisites
 
@@ -13,19 +13,23 @@ This guide covers building, testing, and contributing to the Workvivo CLI.
 git clone https://github.com/yooakim/workvivo-cli.git
 cd workvivo-cli
 
-# Restore dependencies
-dotnet restore src/WorkvivoCli.csproj
+# Restore and build everything (shared library, CLI, MCP server, tests)
+dotnet restore WorkvivoCli.slnx
+dotnet build WorkvivoCli.slnx
 
-# Build the project
-dotnet build src/WorkvivoCli.csproj -c Release
+# Build only the CLI
+dotnet build src/workvivo-cli/WorkvivoCli.csproj -c Release
 
-# Run the tool without installing
-dotnet run --project src/WorkvivoCli.csproj -- users list --help
+# Run the CLI without installing
+dotnet run --project src/workvivo-cli/WorkvivoCli.csproj -- users list --help
+
+# Run the MCP server (STDIO transport; requires credentials)
+dotnet run --project src/workvivo-mcp-server/WorkvivoMcpServer.csproj
 ```
 
 ## Build Scripts
 
-Build self-contained executables for all platforms:
+Build self-contained CLI executables for all platforms (the build scripts publish `src/workvivo-cli` only):
 
 **macOS/Linux:**
 ```bash
@@ -47,9 +51,9 @@ Output will be in `nupkg/` directory as platform-specific archives (`.tar.gz` fo
 ### Build for a Specific Platform
 
 ```bash
-dotnet publish src/WorkvivoCli.csproj -c Release -r win-x64 --self-contained
-dotnet publish src/WorkvivoCli.csproj -c Release -r osx-x64 --self-contained
-dotnet publish src/WorkvivoCli.csproj -c Release -r linux-x64 --self-contained
+dotnet publish src/workvivo-cli/WorkvivoCli.csproj -c Release -r win-x64 --self-contained
+dotnet publish src/workvivo-cli/WorkvivoCli.csproj -c Release -r osx-x64 --self-contained
+dotnet publish src/workvivo-cli/WorkvivoCli.csproj -c Release -r linux-x64 --self-contained
 ```
 
 ### Test the Built Executable
@@ -60,66 +64,86 @@ dotnet publish src/WorkvivoCli.csproj -c Release -r linux-x64 --self-contained
 
 ## Project Structure
 
+The solution (`WorkvivoCli.slnx`) contains three source projects and one test project. The CLI and the MCP server both reference `Workvivo.Shared`; they do not reference each other.
+
 ```
 workvivo-cli/
 ├── src/
-│   ├── Commands/          # Command implementations
-│   │   ├── UsersCommand.cs
-│   │   ├── SpacesCommand.cs
-│   │   └── GlobalSettings.cs
-│   ├── Configuration/     # Config models and setup
-│   │   └── WorkvivoSettings.cs
-│   ├── Infrastructure/    # DI bridge for Spectre.Console.Cli
-│   │   ├── TypeRegistrar.cs
-│   │   └── TypeResolver.cs
-│   ├── Models/            # DTOs for API responses
-│   │   ├── User.cs
-│   │   ├── Space.cs
-│   │   └── PagedResponse.cs
-│   ├── Output/            # Formatters (table, JSON)
-│   │   ├── IOutputFormatter.cs
-│   │   ├── TableOutputFormatter.cs
-│   │   └── JsonOutputFormatter.cs
-│   ├── Serialization/     # JSON source generators (trim-safe)
-│   │   └── AppJsonSerializerContext.cs
-│   ├── Services/          # API client services
-│   │   ├── IWorkvivoApiClient.cs
-│   │   └── WorkvivoApiClient.cs
-│   ├── Program.cs         # Entry point
-│   ├── appsettings.json   # Configuration template
-│   ├── .editorconfig      # Code formatting rules
-│   └── WorkvivoCli.csproj # Project file
-├── tests/                 # Unit tests
-├── docs/                  # Documentation
-├── winget/                # Windows Package Manager manifests
-├── build-all.sh           # Build script (macOS/Linux)
-├── build-all.ps1          # Build script (Windows PowerShell)
-├── build-all.cmd          # Build script (Windows CMD)
-└── WorkvivoCli.slnx       # Solution file
+│   ├── Workvivo.Shared/           # Class library shared by both executables
+│   │   ├── Configuration/         # Config model and validation
+│   │   │   └── WorkvivoSettings.cs
+│   │   ├── Models/                # DTOs for API responses
+│   │   │   ├── User.cs
+│   │   │   ├── Space.cs
+│   │   │   └── PagedResponse.cs
+│   │   ├── Serialization/         # JSON source generators (trim-safe)
+│   │   │   └── AppJsonSerializerContext.cs
+│   │   ├── Services/              # API client
+│   │   │   ├── IWorkvivoApiClient.cs
+│   │   │   └── WorkvivoApiClient.cs
+│   │   └── Workvivo.Shared.csproj
+│   ├── workvivo-cli/              # The `wv` command-line tool
+│   │   ├── Commands/              # Command implementations
+│   │   │   ├── UsersCommand.cs
+│   │   │   ├── SpacesCommand.cs
+│   │   │   └── GlobalSettings.cs
+│   │   ├── Infrastructure/        # DI bridge for Spectre.Console.Cli
+│   │   │   ├── TypeRegistrar.cs
+│   │   │   └── TypeResolver.cs
+│   │   ├── Output/                # Formatters (table, JSON, CSV)
+│   │   │   ├── IOutputFormatter.cs
+│   │   │   ├── OutputFormat.cs
+│   │   │   ├── OutputFormatterFactory.cs
+│   │   │   ├── TableOutputFormatter.cs
+│   │   │   ├── JsonOutputFormatter.cs
+│   │   │   └── CsvOutputFormatter.cs
+│   │   ├── Program.cs             # Entry point
+│   │   ├── appsettings.json       # Configuration template
+│   │   └── WorkvivoCli.csproj
+│   └── workvivo-mcp-server/       # MCP server for AI assistants
+│       ├── Tools/                 # MCP tool classes
+│       │   ├── UserTools.cs
+│       │   └── SpaceTools.cs
+│       ├── Program.cs             # Entry point (STDIO host)
+│       ├── appsettings.json       # Configuration template
+│       ├── README.md              # MCP server setup and usage
+│       └── WorkvivoMcpServer.csproj
+├── tests/
+│   └── WorkvivoCli.Tests/         # Unit tests (CLI + shared library)
+├── docs/                          # Documentation
+├── winget/                        # Windows Package Manager manifests
+├── .editorconfig                  # Code formatting rules
+├── mcp.json.template              # MCP client config template
+├── build-all.sh                   # Build script (macOS/Linux)
+├── build-all.ps1                  # Build script (Windows PowerShell)
+├── build-all.cmd                  # Build script (Windows CMD)
+└── WorkvivoCli.slnx               # Solution file
 ```
+
+**Namespaces:** `Workvivo.Shared.*` for the shared library, `WorkvivoCli.*` for the CLI, `WorkvivoMcpServer.*` for the MCP server.
 
 ## Configuration for Development
 
 ### User Secrets (Recommended for Local Development)
 
-User secrets keep credentials out of source control. They are stored securely on your machine and are tied to this project.
+User secrets keep credentials out of source control. They are stored on your machine, outside the repository, per project. The CLI and the MCP server each have their own secrets store, so set them for whichever you run (for the MCP server, use `--project src/workvivo-mcp-server/WorkvivoMcpServer.csproj`).
 
 ```bash
-dotnet user-secrets set "ApiToken" "your-api-token-here" --project src/WorkvivoCli.csproj
-dotnet user-secrets set "OrganizationId" "your-org-id-here" --project src/WorkvivoCli.csproj
-dotnet user-secrets set "BaseUrl" "https://api.workvivo.com/v1" --project src/WorkvivoCli.csproj
+dotnet user-secrets set "ApiToken" "your-api-token-here" --project src/workvivo-cli/WorkvivoCli.csproj
+dotnet user-secrets set "OrganizationId" "your-org-id-here" --project src/workvivo-cli/WorkvivoCli.csproj
+dotnet user-secrets set "BaseUrl" "https://api.workvivo.com/v1" --project src/workvivo-cli/WorkvivoCli.csproj
 ```
 
 **Manage secrets:**
 ```bash
 # List all secrets
-dotnet user-secrets list --project src/WorkvivoCli.csproj
+dotnet user-secrets list --project src/workvivo-cli/WorkvivoCli.csproj
 
 # Remove a secret
-dotnet user-secrets remove "ApiToken" --project src/WorkvivoCli.csproj
+dotnet user-secrets remove "ApiToken" --project src/workvivo-cli/WorkvivoCli.csproj
 
 # Clear all secrets
-dotnet user-secrets clear --project src/WorkvivoCli.csproj
+dotnet user-secrets clear --project src/workvivo-cli/WorkvivoCli.csproj
 ```
 
 **User secrets location:**
@@ -138,7 +162,7 @@ See the [README](../README.md#configuration) for all configuration options.
 # Format code (auto-fix)
 dotnet format WorkvivoCli.slnx
 
-# Verify formatting without changes (for CI)
+# Verify formatting without changes (not enforced by any workflow)
 dotnet format WorkvivoCli.slnx --verify-no-changes
 ```
 
@@ -149,7 +173,7 @@ dotnet format WorkvivoCli.slnx --verify-no-changes
 dotnet test
 
 # Run tests with coverage
-dotnet test /p:CollectCoverage=true
+dotnet test --collect:"XPlat Code Coverage"
 
 # Run a single test by filter
 dotnet test --filter "FullyQualifiedName~WorkvivoSettingsTests.Validate_WithValidSettings_ShouldNotThrow"
@@ -172,32 +196,40 @@ dotnet test --filter "DisplayName~Validate_WithValidSettings"
 - **Single-file deployment**: All dependencies bundled into one executable (~13MB per platform)
 - **Trimmed for size**: Uses IL trimming to reduce file size while preserving functionality
 
+### Projects
+
+- **`Workvivo.Shared`**: settings, models, JSON serializer context and the API client. Anything both front ends need goes here.
+- **`workvivo-cli`**: the `wv` executable (commands, DI bridge, output formatters).
+- **`workvivo-mcp-server`**: a read-only MCP server exposing the same API as tools.
+
+The sections below describe the CLI unless noted otherwise.
+
 ### Command Structure
 
 - **Spectre.Console.Cli** for CLI framework
 - **`CommandApp`** → **Branches** (`users`, `spaces`) → **`AsyncCommand<TSettings>`** classes (`list`, `get`)
 - Each command is a separate class inheriting from `AsyncCommand<TSettings>`
 - Command options/arguments defined declaratively via `[CommandOption]` and `[CommandArgument]` attributes on nested `Settings` classes
-- All commands inherit from `GlobalSettings` base class which provides shared options (e.g., `--json`)
+- All commands inherit from `GlobalSettings` base class which provides shared options (`--json`, `--csv`)
 
 ### Dependency Injection Flow
 
 1. `Program.cs` builds configuration via `ConfigurationBuilder` (appsettings.json, user-secrets, env vars)
 2. `WorkvivoSettings` bound and validated before DI container is built (skipped for `--help`/`--version`)
 3. `ServiceCollection` configured with settings singleton and `HttpClient` factory for `IWorkvivoApiClient`
-4. `TypeRegistrar` (in `Infrastructure/`) bridges `IServiceCollection` with Spectre.Console.Cli's `ITypeRegistrar`
+4. `TypeRegistrar` (in `src/workvivo-cli/Infrastructure/`) bridges `IServiceCollection` with Spectre.Console.Cli's `ITypeRegistrar`
 5. Commands receive services via **constructor injection**
 
 ### Output Formatting
 
-- Two formatters implement `IOutputFormatter`: `TableOutputFormatter` (Spectre.Console) and `JsonOutputFormatter`
-- **Critical**: All logging goes to `stderr`, data output to `stdout` (enables clean JSON piping)
-- Formatter selected at runtime based on `--json` flag
+- Three formatters implement `IOutputFormatter`: `TableOutputFormatter` (Spectre.Console), `JsonOutputFormatter` and `CsvOutputFormatter`
+- **Critical**: All logging goes to `stderr`, data output to `stdout` (enables clean JSON/CSV piping)
+- `OutputFormatterFactory` selects the formatter at runtime from the `--json` / `--csv` flags
 
 ### JSON Serialization and Trimming
 
 Source generators are used for JSON serialization to ensure trim-safety:
-- `Serialization/AppJsonSerializerContext.cs` contains `[JsonSerializable]` attributes for all models
+- `src/Workvivo.Shared/Serialization/AppJsonSerializerContext.cs` contains `[JsonSerializable]` attributes for all models
 - All JSON operations use the pre-generated context instead of reflection
 - Zero IL2026 warnings
 
@@ -207,6 +239,14 @@ Source generators are used for JSON serialization to ensure trim-safety:
 [JsonSerializable(typeof(YourNewType))]
 [JsonSerializable(typeof(List<YourNewType>))]
 ```
+
+### MCP Server
+
+- Built on the `ModelContextProtocol` SDK with `Microsoft.Extensions.Hosting`; `Program.cs` registers `AddMcpServer().WithStdioServerTransport().WithToolsFromAssembly()`
+- Tools are methods marked `[McpServerTool]` on classes marked `[McpServerToolType]` in `Tools/`, with `[Description]` attributes on the method and its parameters; `IWorkvivoApiClient` is constructor-injected
+- **Critical**: the transport is STDIO, so stdout carries the protocol. All logging must go to `Console.Error`
+- Uses the same configuration sources and `WORKVIVO_*` environment variables as the CLI
+- See [`src/workvivo-mcp-server/README.md`](../src/workvivo-mcp-server/README.md) for client setup and the tool list
 
 ## CI/CD
 
@@ -221,9 +261,9 @@ Source generators are used for JSON serialization to ensure trim-safety:
 ### Creating a Release
 
 ```bash
-# 1. Update version in src/WorkvivoCli.csproj
+# 1. Update version in src/workvivo-cli/WorkvivoCli.csproj
 # 2. Commit and tag
-git add src/WorkvivoCli.csproj
+git add src/workvivo-cli/WorkvivoCli.csproj
 git commit -m "Bump version to 0.2.0"
 git tag v0.2.0
 git push origin main --tags
@@ -258,4 +298,5 @@ Contributions are welcome! Please follow these guidelines:
 - **Microsoft.Extensions.Configuration.\***: Configuration from appsettings.json, user-secrets, environment variables
 - **Microsoft.Extensions.DependencyInjection**: DI container (bridged to Spectre.Console.Cli via `TypeRegistrar`)
 - **Microsoft.Extensions.Http**: `IHttpClientFactory` for `WorkvivoApiClient`
+- **ModelContextProtocol** (preview) and **Microsoft.Extensions.Hosting**: MCP server only
 - **xUnit**, **FluentAssertions**, **NSubstitute**: Testing stack

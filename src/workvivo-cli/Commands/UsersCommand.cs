@@ -18,7 +18,7 @@
 using System.ComponentModel;
 using Spectre.Console.Cli;
 using WorkvivoCli.Output;
-using WorkvivoCli.Services;
+using Workvivo.Shared.Services;
 
 using static WorkvivoCli.Output.OutputFormatterFactory;
 

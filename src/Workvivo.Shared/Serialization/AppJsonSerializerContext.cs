@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
-using WorkvivoCli.Models;
+using Workvivo.Shared.Models;
 
-namespace WorkvivoCli.Serialization;
+namespace Workvivo.Shared.Serialization;
 
 /// <summary>
 /// JSON serialization context for trim-safe JSON operations.

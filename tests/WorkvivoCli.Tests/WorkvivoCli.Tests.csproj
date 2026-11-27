@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\WorkvivoCli.csproj" />
+    <ProjectReference Include="..\..\src\workvivo-cli\WorkvivoCli.csproj" />
   </ItemGroup>
 
 </Project>

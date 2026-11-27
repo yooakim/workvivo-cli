@@ -9,7 +9,7 @@ A .NET 10 CLI tool for managing Workvivo spaces and users via the Workvivo REST 
 ### Build
 ```bash
 # Build the project (development)
-dotnet build src/WorkvivoCli.csproj -c Release
+dotnet build src/workvivo-cli/WorkvivoCli.csproj -c Release
 
 # Build self-contained executables for all platforms
 ./build-all.sh          # macOS/Linux
@@ -17,9 +17,9 @@ dotnet build src/WorkvivoCli.csproj -c Release
 build-all.cmd           # Windows CMD
 
 # Build for a specific platform
-dotnet publish src/WorkvivoCli.csproj -c Release -r win-x64 --self-contained
-dotnet publish src/WorkvivoCli.csproj -c Release -r osx-x64 --self-contained
-dotnet publish src/WorkvivoCli.csproj -c Release -r linux-x64 --self-contained
+dotnet publish src/workvivo-cli/WorkvivoCli.csproj -c Release -r win-x64 --self-contained
+dotnet publish src/workvivo-cli/WorkvivoCli.csproj -c Release -r osx-x64 --self-contained
+dotnet publish src/workvivo-cli/WorkvivoCli.csproj -c Release -r linux-x64 --self-contained
 ```
 
 ### Test
@@ -28,7 +28,7 @@ dotnet publish src/WorkvivoCli.csproj -c Release -r linux-x64 --self-contained
 dotnet test
 
 # Run tests with coverage
-dotnet test /p:CollectCoverage=true
+dotnet test --collect:"XPlat Code Coverage"
 
 # Run a single test by filter
 dotnet test --filter "FullyQualifiedName~WorkvivoSettingsTests.Validate_WithValidSettings_ShouldNotThrow"
@@ -40,14 +40,14 @@ dotnet test --filter "DisplayName~Validate_WithValidSettings"
 # Format code (auto-fix)
 dotnet format WorkvivoCli.slnx
 
-# Verify formatting without changes (for CI)
+# Verify formatting without changes (not enforced by any workflow)
 dotnet format WorkvivoCli.slnx --verify-no-changes
 ```
 
 ### Local Installation (for testing)
 ```bash
 # Run directly without installing
-dotnet run --project src/WorkvivoCli.csproj -- users list --help
+dotnet run --project src/workvivo-cli/WorkvivoCli.csproj -- users list --help
 
 # Or test the built executable
 ./dist/windows-x64/workvivo-cli.exe --version   # Windows
@@ -116,14 +116,14 @@ To add new types to serialization:
 ### User Secrets Setup (Local Development)
 ```bash
 # Set credentials securely (not committed to source control)
-dotnet user-secrets set "ApiToken" "your-token" --project src/WorkvivoCli.csproj
-dotnet user-secrets set "OrganizationId" "your-org-id" --project src/WorkvivoCli.csproj
-dotnet user-secrets set "BaseUrl" "https://api.workvivo.com/v1" --project src/WorkvivoCli.csproj
+dotnet user-secrets set "ApiToken" "your-token" --project src/workvivo-cli/WorkvivoCli.csproj
+dotnet user-secrets set "OrganizationId" "your-org-id" --project src/workvivo-cli/WorkvivoCli.csproj
+dotnet user-secrets set "BaseUrl" "https://api.workvivo.com/v1" --project src/workvivo-cli/WorkvivoCli.csproj
 
 # List/manage secrets
-dotnet user-secrets list --project src/WorkvivoCli.csproj
-dotnet user-secrets remove "ApiToken" --project src/WorkvivoCli.csproj
-dotnet user-secrets clear --project src/WorkvivoCli.csproj
+dotnet user-secrets list --project src/workvivo-cli/WorkvivoCli.csproj
+dotnet user-secrets remove "ApiToken" --project src/workvivo-cli/WorkvivoCli.csproj
+dotnet user-secrets clear --project src/workvivo-cli/WorkvivoCli.csproj
 ```
 
 User secrets location:
@@ -226,9 +226,9 @@ Environment variables use the `WORKVIVO_` prefix which is stripped by `AddEnviro
 
 ### Creating a Release
 ```bash
-# 1. Update version in src/WorkvivoCli.csproj
+# 1. Update version in src/workvivo-cli/WorkvivoCli.csproj
 # 2. Commit and tag
-git add src/WorkvivoCli.csproj
+git add src/workvivo-cli/WorkvivoCli.csproj
 git commit -m "Bump version to 0.2.0"
 git tag v0.2.0
 git push origin main --tags
