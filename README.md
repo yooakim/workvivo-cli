@@ -4,6 +4,8 @@ NB: This is an early version of the Workvivo CLI. At this time it is read-only, 
 
 A .NET 10 command-line tool for managing Workvivo spaces and users via the Workvivo REST API. The tool workrs on Windows, macOS and Linux.
 
+The repository also includes a [Workvivo MCP server](#mcp-server) that gives AI assistants read-only access to the same users and spaces data.
+
 ## Quick Start
 
 **No prerequisites** — self-contained executables include the .NET runtime.
@@ -172,6 +174,20 @@ The CLI provides helpful error messages for common issues:
 - **Missing Credentials**: Displays configuration instructions
 - **API Errors**: Shows HTTP status codes and error messages
 - **Network Errors**: Indicates connection problems
+
+## MCP Server
+
+`src/workvivo-mcp-server` is a [Model Context Protocol](https://modelcontextprotocol.io) server that exposes the same Workvivo data to MCP clients such as VS Code with GitHub Copilot, Claude Desktop and Cursor. It is read-only and provides 11 tools for listing, fetching and searching users and spaces.
+
+Unlike the CLI, it is not shipped as a self-contained executable: it runs from source and needs the [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0).
+
+```bash
+dotnet run --project src/workvivo-mcp-server/WorkvivoMcpServer.csproj
+```
+
+It reads the same `WORKVIVO_APITOKEN`, `WORKVIVO_ORGANIZATIONID` and `WORKVIVO_BASEURL` environment variables as the CLI. `mcp.json.template` in the repository root is a starting point for client configuration.
+
+See the [MCP server README](src/workvivo-mcp-server/README.md) for client setup, the tool list and troubleshooting.
 
 ## Development
 
